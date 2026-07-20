@@ -1,10 +1,11 @@
 function App() {
-
   return (
     <>
-      <h1 className="text-red-500 text-center text-xl font-semibold">Algo-Arena</h1>
+      <h1 className="text-center text-xl font-semibold text-red-500">
+        Algo-Arena
+      </h1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
