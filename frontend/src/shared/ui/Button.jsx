@@ -12,7 +12,7 @@ function Button({ children, variant = 'primary', className = '', ...props }) {
 
   return (
     <button
-      className={`cursor-pointer rounded-md px-5 py-3 font-medium transition-all duration-200 ${variants[variant]} ${className} `}
+      className={`cursor-pointer rounded-md px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-medium transition-all duration-200 ${variants[variant]} ${className} `}
       {...props}
     >
       {children}

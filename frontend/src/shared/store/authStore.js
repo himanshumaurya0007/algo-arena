@@ -16,7 +16,7 @@ const useAuthStore = create((set, get) => ({
         // Demo mode - simulate login with local storage
         const registeredUser = JSON.parse(localStorage.getItem("registeredUser") || "null");
         if (!registeredUser) {
-          throw new Error("No account found. Please register first.");
+          throw new Error("Please Register First");
         }
         if (registeredUser.email !== email) {
           throw new Error("Invalid email address.");

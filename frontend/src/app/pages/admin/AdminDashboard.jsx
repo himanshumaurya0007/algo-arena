@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { dashboardService } from '../../../shared/services/dashboardService';
 import Loader from '../../../shared/ui/Loader';
+import { FiUsers, FiTerminal, FiFileText, FiFolder } from 'react-icons/fi';
 
 function AdminDashboard() {
   const [stats, setStats] = useState(null);
@@ -25,10 +26,10 @@ function AdminDashboard() {
   if (loading) return <Loader />;
 
   const statCards = [
-    { label: 'Total Users', value: stats?.totalUsers || 0, icon: '👥' },
-    { label: 'Total Problems', value: stats?.totalProblems || 0, icon: '💻' },
-    { label: 'Total Submissions', value: stats?.totalSubmissions || 0, icon: '📝' },
-    { label: 'Total Categories', value: stats?.totalCategories || 0, icon: '📂' },
+    { label: 'Total Users', value: stats?.totalUsers || 0, icon: FiUsers },
+    { label: 'Total Problems', value: stats?.totalProblems || 0, icon: FiTerminal },
+    { label: 'Total Submissions', value: stats?.totalSubmissions || 0, icon: FiFileText },
+    { label: 'Total Categories', value: stats?.totalCategories || 0, icon: FiFolder },
   ];
 
   return (
@@ -42,7 +43,9 @@ function AdminDashboard() {
             key={card.label}
             className="bg-surface rounded-lg border border-border p-6"
           >
-            <div className="text-2xl mb-2">{card.icon}</div>
+            <div className="text-2xl mb-2">
+              <card.icon />
+            </div>
             <p className="text-3xl font-bold text-text">{card.value}</p>
             <p className="text-text-muted text-sm mt-1">{card.label}</p>
           </div>

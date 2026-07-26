@@ -1,12 +1,13 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuthStore from '../../shared/store/authStore';
+import { FiGrid, FiFolder, FiTag, FiTerminal, FiUsers, FiLogOut } from 'react-icons/fi';
 
 const adminLinks = [
-  { label: 'Dashboard', path: '/admin', icon: '📊' },
-  { label: 'Categories', path: '/admin/categories', icon: '📂' },
-  { label: 'Topics', path: '/admin/topics', icon: '🏷️' },
-  { label: 'Problems', path: '/admin/problems', icon: '💻' },
-  { label: 'Users', path: '/admin/users', icon: '👥' },
+  { label: 'Dashboard', path: '/admin', icon: FiGrid },
+  { label: 'Categories', path: '/admin/categories', icon: FiFolder },
+  { label: 'Topics', path: '/admin/topics', icon: FiTag },
+  { label: 'Problems', path: '/admin/problems', icon: FiTerminal },
+  { label: 'Users', path: '/admin/users', icon: FiUsers },
 ];
 
 function AdminLayout({ children }) {
@@ -40,22 +41,23 @@ function AdminLayout({ children }) {
                     : 'text-text-muted hover:text-text hover:bg-surface/50'
                 }`}
               >
-                <span>{link.icon}</span>
+                <link.icon className="w-4 h-4" />
                 {link.label}
               </Link>
             );
           })}
         </nav>
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border">
-          <div className="flex items-center justify-between">
-            <div className="text-sm">
-              <p className="text-text font-medium">{user?.username}</p>
+          <div className="flex flex-col gap-2">
+            <div className="text-sm truncate">
+              <p className="text-text font-medium truncate">{user?.email}</p>
               <p className="text-amber-500 text-xs">Admin</p>
             </div>
             <button
               onClick={handleLogout}
-              className="text-sm text-danger hover:text-danger/80"
+              className="flex items-center gap-2 text-sm text-danger hover:text-danger/80 transition-colors"
             >
+              <FiLogOut className="w-4 h-4" />
               Logout
             </button>
           </div>

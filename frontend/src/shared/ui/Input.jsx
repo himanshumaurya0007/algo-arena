@@ -17,7 +17,7 @@ function Input({
       <input
         type={type}
         placeholder={placeholder}
-        className={`w-full rounded-md border border-border bg-surface px-4 py-3 text-text outline-none focus:border-primary ${className}`}
+        className={`w-full rounded-md border border-border bg-surface px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base text-text outline-none focus:border-primary ${className}`}
         {...props}
       />
 
