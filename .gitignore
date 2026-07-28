@@ -26,3 +26,37 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Visual Studio
+**/.vs/
+**/bin/
+**/obj/
+
+# User-specific files
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# Rider
+**/.idea/
+
+# VS Code
+**/.vscode/
+
+# Logs
+**/*.log
+
+# NuGet
+**/*.nupkg
+
+# Environment files
+**/.env
+**/.env.*
+
+# Windows
+**/Thumbs.db
+**/Desktop.ini
+
+# Git
+**/*.orig
