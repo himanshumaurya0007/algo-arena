@@ -1,6 +1,8 @@
-# Development
-tree_structure_generator.py
-tree_structure.txt
+# Development helper files
+**/tree_structure_generator.py
+**/tree_structure.txt
+**/copy_and_paste_contents.py
+**/all_contents.txt
 
 # Logs
 logs
