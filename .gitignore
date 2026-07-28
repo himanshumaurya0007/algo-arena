@@ -1,6 +1,8 @@
-# Development
-tree_structure_generator.py
-tree_structure.txt
+# Development helper files
+**/tree_structure_generator.py
+**/tree_structure.txt
+**/copy_and_paste_contents.py
+**/all_contents.txt
 
 # Logs
 logs
@@ -24,5 +26,38 @@ dist-ssr
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
 *.sw?
+
+# Visual Studio
+**/.vs/
+**/bin/
+**/obj/
+
+# User-specific files
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# Rider
+**/.idea/
+
+# VS Code
+**/.vscode/
+
+# Logs
+**/*.log
+
+# NuGet
+**/*.nupkg
+
+# Environment files
+**/.env
+**/.env.*
+
+# Windows
+**/Thumbs.db
+**/Desktop.ini
+
+# Git
+**/*.orig

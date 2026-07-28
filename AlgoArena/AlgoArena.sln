@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37411.7 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoArena.API", "AlgoArena.API\AlgoArena.API.csproj", "{4F16D7A8-B92B-4A8A-B482-A86BE2CC8800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoArena.Application", "AlgoArena.Application\AlgoArena.Application.csproj", "{C2272CA1-EC5C-4633-B2A2-610800246385}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoArena.Domain", "AlgoArena.Domain\AlgoArena.Domain.csproj", "{976659E9-9612-42CD-8143-0B0159B12941}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoArena.Infrastructure", "AlgoArena.Infrastructure\AlgoArena.Infrastructure.csproj", "{C732FE31-F538-4F0D-9098-30B1F0394421}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoArena.Persistence", "AlgoArena.Persistence\AlgoArena.Persistence.csproj", "{AD0A2D78-7981-4077-BACA-27043A54E477}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F16D7A8-B92B-4A8A-B482-A86BE2CC8800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F16D7A8-B92B-4A8A-B482-A86BE2CC8800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F16D7A8-B92B-4A8A-B482-A86BE2CC8800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F16D7A8-B92B-4A8A-B482-A86BE2CC8800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2272CA1-EC5C-4633-B2A2-610800246385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2272CA1-EC5C-4633-B2A2-610800246385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2272CA1-EC5C-4633-B2A2-610800246385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2272CA1-EC5C-4633-B2A2-610800246385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{976659E9-9612-42CD-8143-0B0159B12941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{976659E9-9612-42CD-8143-0B0159B12941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{976659E9-9612-42CD-8143-0B0159B12941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{976659E9-9612-42CD-8143-0B0159B12941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C732FE31-F538-4F0D-9098-30B1F0394421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C732FE31-F538-4F0D-9098-30B1F0394421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C732FE31-F538-4F0D-9098-30B1F0394421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C732FE31-F538-4F0D-9098-30B1F0394421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD0A2D78-7981-4077-BACA-27043A54E477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0A2D78-7981-4077-BACA-27043A54E477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0A2D78-7981-4077-BACA-27043A54E477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0A2D78-7981-4077-BACA-27043A54E477}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59C65ADA-CDA6-4AB7-A999-DE65A1386F61}
+	EndGlobalSection
+EndGlobal
