@@ -7,6 +7,7 @@ import AboutPage from '../features/landing/pages/AboutPage';
 import ContactPage from '../features/landing/pages/ContactPage';
 import LandingPage from '../features/landing/pages/LandingPage';
 import MainLayout from '../layouts/MainLayout';
+import CodeEditorPage from "../features/problems/editor/pages/CodeEditorPage";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: 'contact',
         element: <ContactPage />,
+      },
+      {
+        path: "editor",
+        element: <CodeEditorPage />,
       },
     ],
   },
