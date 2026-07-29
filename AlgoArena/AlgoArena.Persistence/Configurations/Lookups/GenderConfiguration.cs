@@ -8,7 +8,7 @@ namespace AlgoArena.Persistence.Configurations.Lookups
 {
     public sealed class GenderConfiguration : LookupEntityConfiguration<Gender>
     {
-        public void Configure(EntityTypeBuilder<Gender> builder)
+        public override void Configure(EntityTypeBuilder<Gender> builder)
         {
             base.Configure(builder);
 
