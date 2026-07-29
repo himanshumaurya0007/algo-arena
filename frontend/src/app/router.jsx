@@ -1,17 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom';
-import PublicLayout from '../layouts/PublicLayout';
-import LandingPage from '../features/public/pages/LandingPage';
-import LoginChoicePage from '../features/public/pages/LoginChoicePage';
-import AdminLoginPage from '../features/public/pages/AdminLoginPage';
-import UserLoginPage from '../features/public/pages/UserLoginPage';
-import SignupPage from '../features/public/pages/SignupPage';
-import AboutPage from '../features/public/pages/AboutPage';
-import ContactPage from '../features/public/pages/ContactPage';
+import AdminLoginPage from '../features/auth/pages/AdminLoginPage';
+import LoginChoicePage from '../features/auth/pages/LoginChoicePage';
+import SignupPage from '../features/auth/pages/SignupPage';
+import UserLoginPage from '../features/auth/pages/UserLoginPage';
+import AboutPage from '../features/landing/pages/AboutPage';
+import ContactPage from '../features/landing/pages/ContactPage';
+import LandingPage from '../features/landing/pages/LandingPage';
+import MainLayout from '../layouts/MainLayout';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <PublicLayout />,
+    element: <MainLayout />,
     children: [
       {
         index: true,
