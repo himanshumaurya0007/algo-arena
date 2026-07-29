@@ -15,10 +15,10 @@ function SignupPage() {
 
         <form className="space-y-4">
           <label className="block space-y-2">
-            <span className="text-sm font-semibold">Full Name</span>
+            <span className="text-sm font-semibold">Username</span>
             <input
               className="border-border bg-background focus:border-primary min-h-11 w-full rounded-md border px-4 outline-none"
-              placeholder="Enter your full name"
+              placeholder="Enter your username"
               type="text"
             />
           </label>
