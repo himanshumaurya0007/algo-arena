@@ -829,6 +829,16 @@ namespace AlgoArena.Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AccountStatuses",
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "DisplayOrder", "IsActive", "Name", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { new Guid("33333333-3333-3333-3333-333333333333"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 1, true, "Active", null, null },
+                    { new Guid("44444444-4444-4444-4444-444444444444"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 2, true, "Suspended", null, null },
+                    { new Guid("55555555-5555-5555-5555-555555555555"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 3, true, "Deleted", null, null }
+                });
+
+            migrationBuilder.InsertData(
                 table: "DifficultyLevels",
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "DisplayOrder", "IsActive", "Name", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
@@ -836,6 +846,39 @@ namespace AlgoArena.Persistence.Migrations
                     { new Guid("99999999-9999-9999-9999-999999999991"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 1, true, "Easy", null, null },
                     { new Guid("99999999-9999-9999-9999-999999999992"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 2, true, "Medium", null, null },
                     { new Guid("99999999-9999-9999-9999-999999999993"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 3, true, "Hard", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "EducationLevels",
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "DisplayOrder", "IsActive", "Name", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { new Guid("77777777-7777-7777-7777-777777777771"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 1, true, "High School", null, null },
+                    { new Guid("77777777-7777-7777-7777-777777777772"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 2, true, "Diploma", null, null },
+                    { new Guid("77777777-7777-7777-7777-777777777773"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 3, true, "Bachelor's Degree", null, null },
+                    { new Guid("77777777-7777-7777-7777-777777777774"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 4, true, "Master's Degree", null, null },
+                    { new Guid("77777777-7777-7777-7777-777777777775"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 5, true, "Doctorate", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ExperienceLevels",
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "DisplayOrder", "IsActive", "Name", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { new Guid("88888888-8888-8888-8888-888888888881"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 1, true, "Fresher", null, null },
+                    { new Guid("88888888-8888-8888-8888-888888888882"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 2, true, "Junior", null, null },
+                    { new Guid("88888888-8888-8888-8888-888888888883"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 3, true, "Mid-Level", null, null },
+                    { new Guid("88888888-8888-8888-8888-888888888884"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 4, true, "Senior", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Genders",
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "DisplayOrder", "IsActive", "Name", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { new Guid("66666666-6666-6666-6666-666666666661"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 1, true, "Male", null, null },
+                    { new Guid("66666666-6666-6666-6666-666666666662"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 2, true, "Female", null, null },
+                    { new Guid("66666666-6666-6666-6666-666666666663"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, 3, true, "Other", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -898,6 +941,12 @@ namespace AlgoArena.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AccountStatuses_Name",
+                table: "AccountStatuses",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AuditLogs_UserId",
                 table: "AuditLogs",
                 column: "UserId");
@@ -917,6 +966,24 @@ namespace AlgoArena.Persistence.Migrations
                 name: "IX_EducationDetails_UserId",
                 table: "EducationDetails",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EducationLevels_Name",
+                table: "EducationLevels",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExperienceLevels_Name",
+                table: "ExperienceLevels",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Genders_Name",
+                table: "Genders",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProblemArticles_ProblemId",

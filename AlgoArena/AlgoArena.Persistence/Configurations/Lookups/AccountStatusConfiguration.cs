@@ -8,7 +8,7 @@ namespace AlgoArena.Persistence.Configurations.Lookups
 {
     public sealed class AccountStatusConfiguration : LookupEntityConfiguration<AccountStatus>
     {
-        public void Configure(EntityTypeBuilder<AccountStatus> builder)
+        public override void Configure(EntityTypeBuilder<AccountStatus> builder)
         {
             base.Configure(builder);
 
