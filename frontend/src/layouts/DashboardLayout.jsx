@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import ScrollToTop from '../shared/components/ScrollToTop';
 
 const topLinks = [
   { label: 'Problems', path: '/user/problems' },
@@ -20,6 +21,7 @@ const sideLinks = [
 function DashboardLayout() {
   return (
     <div className="min-h-screen bg-[#141414] text-white">
+      <ScrollToTop />
       <header className="sticky top-0 z-20 border-b border-[#2f2f2f] bg-[#222222]">
         <nav className="flex h-16 items-center justify-between px-6">
           <div className="flex items-center gap-8">
@@ -34,7 +36,7 @@ function DashboardLayout() {
               {topLinks.map((link) => (
                 <NavLink
                   className={({ isActive }) =>
-                    `pb-5 pt-5 text-sm font-semibold transition ${
+                    `pt-5 pb-5 text-sm font-semibold transition ${
                       isActive
                         ? 'border-b-2 border-white text-white'
                         : 'text-gray-400 hover:text-white'

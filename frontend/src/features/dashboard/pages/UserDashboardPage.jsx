@@ -43,26 +43,36 @@ const problems = [
     title: 'Target Strike',
     slug: 'target-strike',
     difficulty: 'Easy',
+    topics: ['Array', 'Hash Map'],
+    status: 'Unsolved',
   },
   {
     title: 'Mirror Word',
     slug: 'mirror-word',
     difficulty: 'Easy',
+    topics: ['String', 'Two Pointers'],
+    status: 'Solved',
   },
   {
     title: 'Longest Clean Segment',
     slug: 'longest-clean-segment',
     difficulty: 'Medium',
+    topics: ['Sliding Window', 'Hash Set'],
+    status: 'Attempted',
   },
   {
     title: 'Product Trail',
     slug: 'product-trail',
     difficulty: 'Medium',
+    topics: ['Array', 'Prefix Product'],
+    status: 'Unsolved',
   },
   {
     title: 'Water Wall Collector',
     slug: 'water-wall-collector',
     difficulty: 'Hard',
+    topics: ['Two Pointers', 'Greedy'],
+    status: 'Unsolved',
   },
 ];
 
@@ -70,6 +80,12 @@ const difficultyVariant = {
   Easy: 'success',
   Medium: 'warning',
   Hard: 'danger',
+};
+
+const statusVariant = {
+  Solved: 'success',
+  Attempted: 'warning',
+  Unsolved: 'muted',
 };
 
 const fadeUp = {
@@ -190,12 +206,31 @@ function UserDashboardPage() {
                   whileHover={{ x: 4 }}
                 >
                   <td className="px-5 py-4">
-                    <Link
-                      className="font-semibold text-white transition hover:text-[#ffa116]"
-                      to={`/user/problems/${problem.slug}`}
-                    >
-                      {problem.title}
-                    </Link>
+                    <div className="space-y-2">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Link
+                          className="font-semibold text-white transition hover:text-[#ffa116]"
+                          to="/editor"
+                        >
+                          {problem.title}
+                        </Link>
+
+                        <Badge variant={statusVariant[problem.status]}>
+                          {problem.status}
+                        </Badge>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        {problem.topics.map((topic) => (
+                          <span
+                            className="rounded-full bg-[#333333] px-2.5 py-1 text-xs font-medium text-gray-400"
+                            key={`${problem.slug}-${topic}`}
+                          >
+                            {topic}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </td>
 
                   <td className="px-5 py-4">
