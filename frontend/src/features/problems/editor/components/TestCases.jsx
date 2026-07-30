@@ -1,66 +1,54 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const testCases = [
+const fallbackTestCases = [
   {
     input: `nums = [2,7,11,15]
 target = 9`,
-    output: `[0,1]`,
+    expectedOutput: `[0,1]`,
   },
   {
     input: `nums = [3,2,4]
 target = 6`,
-    output: `[1,2]`,
-  },
-  {
-    input: `nums = [3,3]
-target = 6`,
-    output: `[0,1]`,
+    expectedOutput: `[1,2]`,
   },
 ];
 
-const TestCases = () => {
+const TestCases = ({ testCases = [] }) => {
+  const visibleCases = testCases.length > 0 ? testCases : fallbackTestCases;
   const [activeCase, setActiveCase] = useState(0);
 
+  const currentCase = visibleCases[activeCase] ?? visibleCases[0];
+
   return (
-    <div className="border border-gray-600 rounded-md p-5">
-
-      {/* Tabs */}
-      <div className="flex gap-2 mb-4 border-b border-gray-600 pb-3">
-
-        {testCases.map((_, index) => (
+    <div className="border-border bg-surface rounded-md border p-5">
+      <div className="border-border mb-4 flex gap-2 border-b pb-3">
+        {visibleCases.map((_, index) => (
           <button
+            className={`rounded-md px-4 py-2 transition ${
+              activeCase === index
+                ? 'bg-primary text-white'
+                : 'bg-background text-text-muted hover:text-primary'
+            }`}
             key={index}
             onClick={() => setActiveCase(index)}
-            className={`px-4 py-2 rounded-md transition ${
-              activeCase === index
-                ? "bg-orange-500 text-white"
-                : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-            }`}
+            type="button"
           >
             Case {index + 1}
           </button>
         ))}
-
       </div>
 
-      {/* Input */}
-      <h3 className="text-orange-400 font-semibold mb-2">
-        Input
-      </h3>
+      <h3 className="text-primary mb-2 font-semibold">Input</h3>
 
-      <pre className="bg-gray-900 border border-gray-700 rounded-md p-3 mb-5">
-        {testCases[activeCase].input}
+      <pre className="border-border bg-background text-text-muted mb-5 rounded-md border p-3">
+        {currentCase.input}
       </pre>
 
-      {/* Expected Output */}
-      <h3 className="text-orange-400 font-semibold mb-2">
-        Expected Output
-      </h3>
+      <h3 className="text-primary mb-2 font-semibold">Expected Output</h3>
 
-      <pre className="bg-gray-900 border border-gray-700 rounded-md p-3">
-        {testCases[activeCase].output}
+      <pre className="border-border bg-background text-text-muted rounded-md border p-3">
+        {currentCase.expectedOutput ?? currentCase.output}
       </pre>
-
     </div>
   );
 };

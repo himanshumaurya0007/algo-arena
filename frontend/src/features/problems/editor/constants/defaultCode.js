@@ -1,5 +1,4 @@
 const defaultCode = {
-
   c: `#include <stdio.h>
 
 int main()
@@ -27,20 +26,6 @@ int main()
     }
 
 }`,
-
-  python: `print("Hello AlgoArena")`,
-
-  javascript: `console.log("Hello AlgoArena");`,
-
-  csharp: `using System;
-
-class Program
-{
-    static void Main()
-    {
-        Console.WriteLine("Hello AlgoArena");
-    }
-}`
 };
 
 export default defaultCode;
