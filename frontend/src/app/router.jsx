@@ -10,6 +10,10 @@ import CodeEditorPage from '../features/problems/editor/pages/CodeEditorPage';
 import UserDashboardPage from '../features/dashboard/pages/UserDashboardPage';
 import DashboardLayout from '../layouts/DashboardLayout';
 import MainLayout from '../layouts/MainLayout';
+import AdminDashboardPage from '../features/admin/pages/AdminDashboardPage';
+import AdminLayout from '../layouts/AdminLayout';
+import AdminAddProblemPage from '../features/admin/problems/pages/AdminAddProblemPage';
+import AdminProblemsPage from '../features/admin/problems/pages/AdminProblemsPage';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +61,24 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <UserDashboardPage />,
+      },
+    ],
+  },
+  {
+    path: '/admin',
+    element: <AdminLayout />,
+    children: [
+      {
+        path: 'dashboard',
+        element: <AdminDashboardPage />,
+      },
+      {
+        path: 'problems',
+        element: <AdminProblemsPage />,
+      },
+      {
+        path: 'problems/new',
+        element: <AdminAddProblemPage />,
       },
     ],
   },
