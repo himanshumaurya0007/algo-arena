@@ -6,8 +6,10 @@ import UserLoginPage from '../features/auth/pages/UserLoginPage';
 import AboutPage from '../features/landing/pages/AboutPage';
 import ContactPage from '../features/landing/pages/ContactPage';
 import LandingPage from '../features/landing/pages/LandingPage';
+import CodeEditorPage from '../features/problems/editor/pages/CodeEditorPage';
+import UserDashboardPage from '../features/dashboard/pages/UserDashboardPage';
+import DashboardLayout from '../layouts/DashboardLayout';
 import MainLayout from '../layouts/MainLayout';
-import CodeEditorPage from "../features/problems/editor/pages/CodeEditorPage";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +45,18 @@ const router = createBrowserRouter([
         element: <ContactPage />,
       },
       {
-        path: "editor",
+        path: 'editor',
         element: <CodeEditorPage />,
+      },
+    ],
+  },
+  {
+    path: '/user',
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: 'dashboard',
+        element: <UserDashboardPage />,
       },
     ],
   },
