@@ -14,6 +14,12 @@ namespace AlgoArena.Application.Features.Problems.Interfaces
             Guid id,
             CancellationToken cancellationToken);
 
+        Task<IReadOnlyList<Problem>> GetPublishedAsync(
+             CancellationToken cancellationToken);
+
+        Task<Problem?> GetBySlugAsync(
+            string slug,
+            CancellationToken cancellationToken);
         Task<bool> ExistsAsync(
             string slug,
             CancellationToken cancellationToken);

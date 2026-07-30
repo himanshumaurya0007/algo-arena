@@ -4,6 +4,7 @@ using AlgoArena.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlgoArena.Persistence.Migrations
 {
     [DbContext(typeof(AlgoArenaDbContext))]
-    partial class AlgoArenaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260730174058_SeedInitialProblems")]
+    partial class SeedInitialProblems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
