@@ -10,7 +10,7 @@ const stats = [
     helper: 'Across all topics',
     icon: '✓',
     className:
-      'border-emerald-500/20 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.22),transparent_32%),#1f1f1f]',
+      'border-emerald-500/20 bg-gradient-to-br from-emerald-500/25 to-[#1f1f1f]',
   },
   {
     label: 'Current Streak',
@@ -18,7 +18,7 @@ const stats = [
     helper: 'Days of practice',
     icon: '🔥',
     className:
-      'border-orange-500/25 bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.28),transparent_34%),#1f1f1f]',
+      'border-orange-500/25 bg-gradient-to-br from-orange-500/30 to-[#1f1f1f]',
   },
   {
     label: 'Articles Read',
@@ -26,7 +26,7 @@ const stats = [
     helper: 'Concepts reviewed',
     icon: 'A',
     className:
-      'border-sky-500/20 bg-[radial-gradient(circle_at_top_right,rgba(14,165,233,0.22),transparent_32%),#1f1f1f]',
+      'border-sky-500/20 bg-gradient-to-br from-sky-500/25 to-[#1f1f1f]',
   },
   {
     label: 'Videos Watched',
@@ -34,7 +34,7 @@ const stats = [
     helper: 'Guided lessons',
     icon: '▶',
     className:
-      'border-violet-500/20 bg-[radial-gradient(circle_at_top_right,rgba(139,92,246,0.24),transparent_32%),#1f1f1f]',
+      'border-violet-500/20 bg-gradient-to-br from-violet-500/25 to-[#1f1f1f]',
   },
 ];
 
@@ -110,27 +110,27 @@ function UserDashboardPage() {
       variants={staggerContainer}
     >
       <motion.section
-        className="rounded-lg border border-[#2f2f2f] bg-[#1f1f1f] p-6"
+       className="border-border bg-surface rounded-lg border p-6 shadow-sm"
         transition={{ duration: 0.2 }}
         variants={fadeUp}
-        whileHover={{ y: -3, borderColor: '#3f3f3f' }}
+       whileHover={{ y: -3 }}
       >
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
           <div>
-            <p className="text-sm font-semibold text-[#ffa116]">Welcome back</p>
+            <p className="text-primary text-sm font-semibold">Welcome back</p>
 
-            <h1 className="mt-2 text-3xl font-extrabold text-white">
+            <h1 className="text-text mt-2 text-3xl font-extrabold">
               Keep your coding streak alive.
             </h1>
 
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-400">
+            <p className="text-text-muted mt-3 max-w-2xl text-sm leading-6">
               Continue solving DSA problems, revise concepts through articles,
               and use video resources whenever you need a clearer explanation.
             </p>
           </div>
 
           <Link
-            className="rounded-md bg-[#ffa116] px-5 py-3 text-sm font-bold text-[#141414] transition hover:bg-[#ffb84d]"
+           className="bg-primary rounded-md px-5 py-3 text-sm font-bold text-white transition hover:opacity-90"
             to="/user/problems"
           >
             Start Practice
@@ -149,21 +149,19 @@ function UserDashboardPage() {
             variants={fadeUp}
             whileHover={{ y: -5, scale: 1.02 }}
           >
-            <Card
-              className={`relative overflow-hidden text-white ${stat.className}`}
-            >
+            <Card className={`relative overflow-hidden ${stat.className}`}>
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-sm text-gray-400">{stat.label}</p>
+                  <p className="text-text-muted text-sm">{stat.label}</p>
 
-                  <p className="mt-3 text-3xl font-extrabold text-white">
+                  <p className="text-text mt-3 text-3xl font-extrabold">
                     {stat.value}
                   </p>
 
-                  <p className="mt-2 text-sm text-gray-500">{stat.helper}</p>
+                  <p className="text-text-muted mt-2 text-sm">{stat.helper}</p>
                 </div>
 
-                <span className="flex size-10 items-center justify-center rounded-md bg-white/10 text-lg font-bold text-white">
+                <span className="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-md text-lg font-bold">
                   {stat.icon}
                 </span>
               </div>
@@ -173,21 +171,21 @@ function UserDashboardPage() {
       </motion.section>
 
       <motion.section
-        className="rounded-lg border border-[#2f2f2f] bg-[#1f1f1f]"
+        className="border-border bg-surface rounded-lg border shadow-sm"
         transition={{ duration: 0.35 }}
         variants={fadeUp}
       >
-        <div className="border-b border-[#2f2f2f] px-5 py-4">
-          <h2 className="text-xl font-bold text-white">Recommended Problems</h2>
+        <div className="border-border border-b px-5 py-4">
+          <h2 className="text-text text-xl font-bold">Recommended Problems</h2>
 
-          <p className="mt-1 text-sm text-gray-400">
+          <p className="text-text-muted mt-1 text-sm">
             Pick a problem, open its learning material, then jump into solving.
           </p>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full min-w-[720px] text-left">
-            <thead className="border-b border-[#2f2f2f] text-sm text-gray-400">
+            <thead className="border-border text-text-muted border-b text-sm">
               <tr>
                 <th className="px-5 py-4 font-semibold">Problem</th>
                 <th className="px-5 py-4 font-semibold">Difficulty</th>
@@ -199,7 +197,7 @@ function UserDashboardPage() {
             <tbody>
               {problems.map((problem) => (
                 <motion.tr
-                  className="border-b border-[#2f2f2f] transition last:border-b-0 hover:bg-[#262626]"
+                  className="border-border transition last:border-b-0 hover:bg-background border-b"
                   key={problem.slug}
                   transition={{ duration: 0.18 }}
                   variants={fadeUp}
@@ -209,7 +207,7 @@ function UserDashboardPage() {
                     <div className="space-y-2">
                       <div className="flex flex-wrap items-center gap-2">
                         <Link
-                          className="font-semibold text-white transition hover:text-[#ffa116]"
+                          className="text-text hover:text-primary font-semibold transition"
                           to="/editor"
                         >
                           {problem.title}
@@ -223,7 +221,7 @@ function UserDashboardPage() {
                       <div className="flex flex-wrap gap-2">
                         {problem.topics.map((topic) => (
                           <span
-                            className="rounded-full bg-[#333333] px-2.5 py-1 text-xs font-medium text-gray-400"
+                            className="bg-background text-text-muted rounded-full px-2.5 py-1 text-xs font-medium"
                             key={`${problem.slug}-${topic}`}
                           >
                             {topic}
@@ -241,7 +239,7 @@ function UserDashboardPage() {
 
                   <td className="px-5 py-4">
                     <Link
-                      className="text-sm font-semibold text-[#ffa116] hover:underline"
+                      className="text-primary text-sm font-semibold hover:underline"
                       to={`/user/articles/${problem.slug}`}
                     >
                       Read Article
@@ -250,7 +248,7 @@ function UserDashboardPage() {
 
                   <td className="px-5 py-4">
                     <Link
-                      className="text-sm font-semibold text-[#4ade80] hover:underline"
+                      className="text-secondary text-sm font-semibold hover:underline"
                       to={`/user/videos/${problem.slug}`}
                     >
                       Watch Video
