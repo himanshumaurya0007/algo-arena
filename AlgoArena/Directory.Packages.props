@@ -1,0 +1,35 @@
+<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+    <!-- ASP.NET -->
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="9.0.17" />
+
+    <!-- Entity Framework Core -->
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.18" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.18" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.18" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.18" />
+
+    <!-- AutoMapper -->
+    <PackageVersion Include="AutoMapper" Version="16.2.0" />
+
+    <!-- FluentValidation -->
+    <PackageVersion Include="FluentValidation" Version="12.1.0" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.0" />
+
+    <!-- MediatR -->
+    <PackageVersion Include="MediatR" Version="14.1.0" />
+
+    <!-- Microsoft Extensions -->
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.18" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="9.0.6" />
+
+  </ItemGroup>
+
+</Project>
