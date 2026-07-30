@@ -20,13 +20,13 @@ const sideLinks = [
 
 function DashboardLayout() {
   return (
-    <div className="min-h-screen bg-[#141414] text-white">
+    <div className="bg-background text-text min-h-screen">
       <ScrollToTop />
-      <header className="sticky top-0 z-20 border-b border-[#2f2f2f] bg-[#222222]">
+      <header className="border-border bg-surface sticky top-0 z-20 border-b">
         <nav className="flex h-16 items-center justify-between px-6">
           <div className="flex items-center gap-8">
             <NavLink
-              className="font-heading text-2xl font-extrabold text-white"
+              className="font-heading text-primary text-2xl font-extrabold"
               to="/user/dashboard"
             >
               AlgoArena
@@ -38,8 +38,8 @@ function DashboardLayout() {
                   className={({ isActive }) =>
                     `pt-5 pb-5 text-sm font-semibold transition ${
                       isActive
-                        ? 'border-b-2 border-white text-white'
-                        : 'text-gray-400 hover:text-white'
+                        ? 'border-primary text-primary border-b-2'
+                        : 'text-text-muted hover:text-primary'
                     }`
                   }
                   key={link.path}
@@ -52,12 +52,12 @@ function DashboardLayout() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="hidden rounded-full bg-[#333333] px-4 py-2 text-sm text-gray-400 md:block">
+            <div className="bg-background text-text-muted hidden rounded-full px-4 py-2 text-sm md:block">
               Search
             </div>
 
             <NavLink
-              className="rounded-md bg-[#333333] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#3f3f3f]"
+              className="bg-primary rounded-md px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
               to="/user/profile"
             >
               Profile
@@ -67,15 +67,15 @@ function DashboardLayout() {
       </header>
 
       <div className="grid min-h-[calc(100vh-4rem)] grid-cols-1 lg:grid-cols-[260px_1fr]">
-        <aside className="hidden border-r border-[#2f2f2f] bg-[#1a1a1a] p-4 lg:block">
+        <aside className="border-border bg-surface hidden border-r p-4 lg:block">
           <div className="space-y-2">
             {sideLinks.map((link) => (
               <NavLink
                 className={({ isActive }) =>
                   `block rounded-md px-4 py-3 text-sm font-semibold transition ${
                     isActive
-                      ? 'bg-[#2f2f2f] text-white'
-                      : 'text-gray-400 hover:bg-[#252525] hover:text-white'
+                      ? 'bg-primary text-white'
+                      : 'text-text-muted hover:bg-background hover:text-primary'
                   }`
                 }
                 key={link.path}
