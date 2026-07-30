@@ -2,6 +2,7 @@
 using AlgoArena.Persistence.Configurations.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using AlgoArena.Persistence.Seeds;
 
 namespace AlgoArena.Persistence.Configurations.Problems
 {
@@ -12,6 +13,8 @@ namespace AlgoArena.Persistence.Configurations.Problems
             base.Configure(builder);
 
             builder.ToTable("ProblemExamples");
+
+            builder.HasData(ProblemExampleSeed.Data);
 
             builder.Property(x => x.ImageUrl)
                 .HasMaxLength(500);

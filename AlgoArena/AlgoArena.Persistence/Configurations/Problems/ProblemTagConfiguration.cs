@@ -1,6 +1,7 @@
 ﻿using AlgoArena.Domain.Entities.Problems;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using AlgoArena.Persistence.Seeds;
 
 namespace AlgoArena.Persistence.Configurations.Problems
 {
@@ -9,6 +10,8 @@ namespace AlgoArena.Persistence.Configurations.Problems
         public void Configure(EntityTypeBuilder<ProblemTag> builder)
         {
             builder.ToTable("ProblemTags");
+
+            builder.HasData(ProblemTagSeed.Data);
 
             builder.HasKey(x => new
             {

@@ -2,6 +2,7 @@
 using AlgoArena.Persistence.Configurations.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using AlgoArena.Persistence.Seeds;
 
 namespace AlgoArena.Persistence.Configurations.Problems
 {
@@ -26,6 +27,8 @@ namespace AlgoArena.Persistence.Configurations.Problems
 
             builder.HasIndex(x => x.Slug)
                 .IsUnique();
+
+            builder.HasData(ProblemSeed.Data);
 
             builder.Property(x => x.Description)
                 .IsRequired();
