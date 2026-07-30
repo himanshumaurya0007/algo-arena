@@ -12,7 +12,7 @@ const EditorToolbar = ({
   changeFontSize,
 }) => {
   return (
-    <div className="flex justify-between items-center mb-4">
+    <div className="flex items-center justify-between border border-gray-600 rounded-md p-3 mb-3">
 
       {/* Center */}
       <div className="flex gap-3">

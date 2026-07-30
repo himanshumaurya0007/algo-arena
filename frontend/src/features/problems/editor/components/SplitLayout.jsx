@@ -13,7 +13,7 @@ const SplitLayout = () => {
   return (
     <div className="p-6 space-y-5">
 
-      <EditorHeader />
+      {/* <EditorHeader /> */}
 
       <div className="grid grid-cols-2 gap-5 h-[700px]">
 
@@ -30,9 +30,9 @@ const SplitLayout = () => {
             changeFontSize={editor.changeFontSize}
           />
 
-          <div className="flex-1">
-            <CodeEditor editor={editor} />
-          </div>
+          <div className="flex-1 min-h-0">
+    <CodeEditor editor={editor} />
+</div>
 
         </div>
 

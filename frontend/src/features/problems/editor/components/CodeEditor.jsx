@@ -10,7 +10,7 @@ const CodeEditor = ({ editor }) => {
   } = editor;
 
   return (
-    <div className="border border-gray-600 rounded-md overflow-hidden flex-1">
+    <div className="h-full border border-gray-600 rounded-md overflow-hidden">
       <Editor
         height="100%"
         language={language}
@@ -23,6 +23,11 @@ const CodeEditor = ({ editor }) => {
           automaticLayout: true,
           scrollBeyondLastLine: false,
           wordWrap: "on",
+
+          padding: {
+            top: 16,
+      },
+          lineNumbersMinChars: 3,
         }}
       />
     </div>

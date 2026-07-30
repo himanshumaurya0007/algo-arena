@@ -60,7 +60,7 @@
 
 const EditorHeader = () => {
   return (
-    <div className="border rounded-lg p-4 mb-5">
+    <div className="border rounded-md p-4 mb-5">
       <h1 className="text-3xl font-bold text-orange-500">
         AlgoArena
       </h1>
