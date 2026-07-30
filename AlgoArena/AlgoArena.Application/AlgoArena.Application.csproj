@@ -15,15 +15,20 @@
     <Folder Include="Features\Videos\" />
     <Folder Include="Features\Articles\" />
     <Folder Include="Features\Categories\" />
-    <Folder Include="Features\Problems\" />
     <Folder Include="Features\Topics\" />
     <Folder Include="Features\Users\" />
     <Folder Include="Features\Authentication\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Behaviors\" />
     <Folder Include="Validators\" />
     <Folder Include="DTOs\" />
     <Folder Include="Common\" />
   </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" />
+		<PackageReference Include="FluentValidation" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+		<PackageReference Include="MediatR" />
+	</ItemGroup>
 
 </Project>
