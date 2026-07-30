@@ -1,4 +1,4 @@
-import EditorHeader from "./EditorHeader";
+
 import ProblemPanel from "./ProblemPanel";
 import CodeEditor from "./CodeEditor";
 import TestCases from "./TestCases";
