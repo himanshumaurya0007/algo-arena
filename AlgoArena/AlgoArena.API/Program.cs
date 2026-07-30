@@ -22,9 +22,6 @@ namespace AlgoArena.API
                 )
             );
 
-            
-            
-            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
