@@ -8,7 +8,7 @@ namespace AlgoArena.Persistence.Configurations.Lookups
 {
     public sealed class ExperienceLevelConfiguration : LookupEntityConfiguration<ExperienceLevel>
     {
-        public void Configure(EntityTypeBuilder<ExperienceLevel> builder)
+        public override void Configure(EntityTypeBuilder<ExperienceLevel> builder)
         {
             base.Configure(builder);
 

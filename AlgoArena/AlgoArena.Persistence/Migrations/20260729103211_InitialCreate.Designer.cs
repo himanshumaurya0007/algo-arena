@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlgoArena.Persistence.Migrations
 {
     [DbContext(typeof(AlgoArenaDbContext))]
-    [Migration("20260728044955_InitialCreate")]
+    [Migration("20260729103211_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -322,7 +322,39 @@ namespace AlgoArena.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AccountStatuses");
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("AccountStatuses", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333333"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 1,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Active"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444444"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 2,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Suspended"
+                        },
+                        new
+                        {
+                            Id = new Guid("55555555-5555-5555-5555-555555555555"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 3,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Deleted"
+                        });
                 });
 
             modelBuilder.Entity("AlgoArena.Domain.Entities.Lookups.DifficultyLevel", b =>
@@ -448,7 +480,57 @@ namespace AlgoArena.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EducationLevels");
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("EducationLevels", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("77777777-7777-7777-7777-777777777771"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 1,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "High School"
+                        },
+                        new
+                        {
+                            Id = new Guid("77777777-7777-7777-7777-777777777772"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 2,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Diploma"
+                        },
+                        new
+                        {
+                            Id = new Guid("77777777-7777-7777-7777-777777777773"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 3,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Bachelor's Degree"
+                        },
+                        new
+                        {
+                            Id = new Guid("77777777-7777-7777-7777-777777777774"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 4,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Master's Degree"
+                        },
+                        new
+                        {
+                            Id = new Guid("77777777-7777-7777-7777-777777777775"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 5,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Doctorate"
+                        });
                 });
 
             modelBuilder.Entity("AlgoArena.Domain.Entities.Lookups.ExperienceLevel", b =>
@@ -495,7 +577,48 @@ namespace AlgoArena.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ExperienceLevels");
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ExperienceLevels", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("88888888-8888-8888-8888-888888888881"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 1,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Fresher"
+                        },
+                        new
+                        {
+                            Id = new Guid("88888888-8888-8888-8888-888888888882"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 2,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Junior"
+                        },
+                        new
+                        {
+                            Id = new Guid("88888888-8888-8888-8888-888888888883"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 3,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Mid-Level"
+                        },
+                        new
+                        {
+                            Id = new Guid("88888888-8888-8888-8888-888888888884"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 4,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Senior"
+                        });
                 });
 
             modelBuilder.Entity("AlgoArena.Domain.Entities.Lookups.Gender", b =>
@@ -542,7 +665,39 @@ namespace AlgoArena.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genders");
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Genders", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("66666666-6666-6666-6666-666666666661"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 1,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Male"
+                        },
+                        new
+                        {
+                            Id = new Guid("66666666-6666-6666-6666-666666666662"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 2,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Female"
+                        },
+                        new
+                        {
+                            Id = new Guid("66666666-6666-6666-6666-666666666663"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayOrder = 3,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Other"
+                        });
                 });
 
             modelBuilder.Entity("AlgoArena.Domain.Entities.Lookups.ProgrammingDomain", b =>

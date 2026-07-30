@@ -8,7 +8,7 @@ namespace AlgoArena.Persistence.Configurations.Lookups
 {
     public sealed class EducationLevelConfiguration : LookupEntityConfiguration<EducationLevel>
     {
-        public void Configure(EntityTypeBuilder<EducationLevel> builder)
+        public override void Configure(EntityTypeBuilder<EducationLevel> builder)
         {
             base.Configure(builder);
 
