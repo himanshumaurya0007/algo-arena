@@ -7,6 +7,9 @@ import AboutPage from '../features/landing/pages/AboutPage';
 import ContactPage from '../features/landing/pages/ContactPage';
 import LandingPage from '../features/landing/pages/LandingPage';
 import MainLayout from '../layouts/MainLayout';
+import DashboardLayout from '../layouts/DashboardLayout';
+import UserDashboardPage from '../features/dashboard/pages/UserDashboardPage';
+
 
 const router = createBrowserRouter([
   {
@@ -40,6 +43,16 @@ const router = createBrowserRouter([
       {
         path: 'contact',
         element: <ContactPage />,
+      },
+    ],
+  },
+  {
+    path: '/user',
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: 'dashboard',
+        element: <UserDashboardPage />,
       },
     ],
   },
