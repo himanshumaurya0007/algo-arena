@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import ScrollToTop from '../shared/components/ScrollToTop';
 
 const navLinks = [
   { label: 'Home', path: '/' },
@@ -9,6 +10,7 @@ const navLinks = [
 function PublicLayout() {
   return (
     <div className="bg-background text-text min-h-screen">
+      <ScrollToTop />
       <header className="border-border bg-surface border-b">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <NavLink
