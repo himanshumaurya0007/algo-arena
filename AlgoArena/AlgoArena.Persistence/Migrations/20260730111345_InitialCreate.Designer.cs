@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlgoArena.Persistence.Migrations
 {
     [DbContext(typeof(AlgoArenaDbContext))]
-    [Migration("20260729103211_InitialCreate")]
+    [Migration("20260730111345_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
