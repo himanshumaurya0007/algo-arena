@@ -1,7 +1,7 @@
 using AlgoArena.API.Swagger;
 using AlgoArena.Application.DependencyInjection;
-using AlgoArena.Persistence.DependencyInjection;
 using AlgoArena.Infrastructure.DependencyInjection;
+using AlgoArena.Persistence.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -17,7 +17,6 @@ namespace AlgoArena.API
             // Controllers
             builder.Services.AddControllers();
 
-
             // CORS
             builder.Services.AddCors(options =>
             {
@@ -30,22 +29,17 @@ namespace AlgoArena.API
                 });
             });
 
-
             // Swagger
             builder.Services.AddSwaggerDocumentation();
-
 
             // Application Layer
             builder.Services.AddApplication();
 
-
-            // Persistence Layer
-            builder.Services.AddPersistence(builder.Configuration);
-
-
             // Infrastructure Layer
             builder.Services.AddInfrastructure(builder.Configuration);
 
+            // Persistence Layer
+            builder.Services.AddPersistence(builder.Configuration);
 
             // JWT Authentication
             builder.Services
@@ -74,10 +68,9 @@ namespace AlgoArena.API
                         };
                 });
 
-
             var app = builder.Build();
 
-
+            // Swagger
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -92,21 +85,18 @@ namespace AlgoArena.API
                 });
             }
 
-
+            // HTTPS
             app.UseHttpsRedirection();
 
-
+            // CORS
             app.UseCors("FrontendPolicy");
-
 
             // Authentication must come before Authorization
             app.UseAuthentication();
-
             app.UseAuthorization();
 
-
+            // Controllers
             app.MapControllers();
-
 
             app.Run();
         }
