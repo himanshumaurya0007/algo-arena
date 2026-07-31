@@ -4,3 +4,7 @@
 @import './typography.css';
 @import './utilities.css';
 @import './scrollbar.css';
+
+input[type="password"]::-ms-reveal {
+  display: none;
+}
