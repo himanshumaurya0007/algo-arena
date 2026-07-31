@@ -1,4 +1,6 @@
-﻿using AlgoArena.Persistence.Data;
+﻿using AlgoArena.Domain.Interfaces.UserRepositories;
+using AlgoArena.Persistence.Data;
+using AlgoArena.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,11 +16,15 @@ namespace AlgoArena.Persistence.DependencyInjection
             this IServiceCollection services,
             IConfiguration configuration)
         {
+            // Database
             services.AddDbContext<AlgoArenaDbContext>(options =>
             {
                 options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection"));
             });
+
+            // Repositories
+            services.AddScoped<IUserRepository, UserRepository>();
 
             // Feature registrations
             services.AddProblemsPersistence();

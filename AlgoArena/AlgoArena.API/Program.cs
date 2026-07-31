@@ -1,6 +1,10 @@
 using AlgoArena.API.Swagger;
 using AlgoArena.Application.DependencyInjection;
 using AlgoArena.Persistence.DependencyInjection;
+using AlgoArena.Infrastructure.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace AlgoArena.API
 {
@@ -13,6 +17,8 @@ namespace AlgoArena.API
             // Controllers
             builder.Services.AddControllers();
 
+
+            // CORS
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("FrontendPolicy", policy =>
@@ -24,16 +30,53 @@ namespace AlgoArena.API
                 });
             });
 
+
             // Swagger
             builder.Services.AddSwaggerDocumentation();
+
 
             // Application Layer
             builder.Services.AddApplication();
 
+
             // Persistence Layer
             builder.Services.AddPersistence(builder.Configuration);
 
+
+            // Infrastructure Layer
+            builder.Services.AddInfrastructure(builder.Configuration);
+
+
+            // JWT Authentication
+            builder.Services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters =
+                        new TokenValidationParameters
+                        {
+                            ValidateIssuer = true,
+                            ValidateAudience = true,
+                            ValidateLifetime = true,
+                            ValidateIssuerSigningKey = true,
+
+                            ValidIssuer =
+                                builder.Configuration["Jwt:Issuer"],
+
+                            ValidAudience =
+                                builder.Configuration["Jwt:Audience"],
+
+                            IssuerSigningKey =
+                                new SymmetricSecurityKey(
+                                    Encoding.UTF8.GetBytes(
+                                        builder.Configuration["Jwt:Key"]!
+                                    ))
+                        };
+                });
+
+
             var app = builder.Build();
+
 
             if (app.Environment.IsDevelopment())
             {
@@ -49,13 +92,21 @@ namespace AlgoArena.API
                 });
             }
 
+
             app.UseHttpsRedirection();
+
 
             app.UseCors("FrontendPolicy");
 
+
+            // Authentication must come before Authorization
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
+
             app.MapControllers();
+
 
             app.Run();
         }
