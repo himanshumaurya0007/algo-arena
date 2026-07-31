@@ -13,13 +13,12 @@ function App() {
       {/* Demo Login Page on / */}
       <Route path="/" element={<DemoLoginPage />} />
 
-      {/* User Profile Page on /profile */}
+      {/* User Profile Page routes */}
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/users/profile" element={<ProfilePage />} />
+      <Route path="/users/profile/:username" element={<ProfilePage />} />
 
-      {/* Legacy / Alias route for /users/profile */}
-      <Route path="/users/profile" element={<Navigate to="/profile" replace />} />
-
-      {/* Catch-all route */}
+      {/* Catch-all fallback route */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
