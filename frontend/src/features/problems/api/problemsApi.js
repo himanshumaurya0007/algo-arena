@@ -19,3 +19,13 @@ export async function getProblemBySlug(slug) {
 
   return response.json();
 }
+
+export async function getPrimaryArticleByProblemSlug(slug) {
+  const response = await fetch(`${API_BASE_URL}/problems/${slug}/article`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch article');
+  }
+
+  return response.json();
+}
