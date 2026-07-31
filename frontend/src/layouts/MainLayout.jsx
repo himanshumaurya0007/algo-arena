@@ -11,8 +11,9 @@ function PublicLayout() {
   return (
     <div className="bg-background text-text min-h-screen">
       <ScrollToTop />
+
       <header className="border-border bg-surface border-b">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <nav className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between">
           <NavLink
             className="font-heading text-primary text-2xl font-extrabold"
             to="/"
@@ -20,7 +21,7 @@ function PublicLayout() {
             AlgoArena
           </NavLink>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-5">
             {navLinks.map((link) => (
               <NavLink
                 className={({ isActive }) =>
@@ -50,7 +51,7 @@ function PublicLayout() {
       <Outlet />
 
       <footer className="border-border border-t">
-        <div className="text-text-muted mx-auto flex max-w-7xl items-center justify-between px-6 py-5 text-sm">
+        <div className="text-text-muted mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-sm sm:px-6 md:flex-row md:items-center md:justify-between">
           <p>AlgoArena</p>
           <p>Practice. Learn. Improve.</p>
         </div>
