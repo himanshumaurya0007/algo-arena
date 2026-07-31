@@ -35,20 +35,21 @@ namespace AlgoArena.Persistence.Repositories.Problems
         /// <summary>
         /// Retrieves a single problem by Id.
         /// </summary>
-        public async Task<Problem?> GetByIdAsync(
-            Guid id,
-            CancellationToken cancellationToken)
-        {
-            return await _dbContext.Problems
-                .Include(problem => problem.ProgrammingDomain)
-                .Include(problem => problem.DifficultyLevel)
-                .FirstOrDefaultAsync(
-                    problem =>
-                        problem.Id == id &&
-                        !problem.IsDeleted,
-                    cancellationToken);
-        }
-
+       public async Task<Problem?> GetByIdAsync(
+    Guid id,
+    CancellationToken cancellationToken)
+{
+    return await _dbContext.Problems
+        .Include(problem => problem.ProgrammingDomain)
+        .Include(problem => problem.DifficultyLevel)
+        .Include(problem => problem.ProblemBoilerplates)
+            .ThenInclude(boilerplate => boilerplate.ProgrammingLanguage)
+        .FirstOrDefaultAsync(
+            problem =>
+                problem.Id == id &&
+                !problem.IsDeleted,
+            cancellationToken);
+}
 
 
         /// <summary>
