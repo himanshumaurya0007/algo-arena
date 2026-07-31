@@ -1,5 +1,6 @@
 using AlgoArena.API.Swagger;
 using AlgoArena.Application.DependencyInjection;
+using AlgoArena.Infrastructure;
 using AlgoArena.Persistence.DependencyInjection;
 
 namespace AlgoArena.API
@@ -30,6 +31,9 @@ namespace AlgoArena.API
             // Application Layer
             builder.Services.AddApplication();
 
+            // Infrastructure Layer
+            builder.Services.AddInfrastructure(builder.Configuration);
+            
             // Persistence Layer
             builder.Services.AddPersistence(builder.Configuration);
 
