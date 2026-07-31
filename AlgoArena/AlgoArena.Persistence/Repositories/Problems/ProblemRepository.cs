@@ -49,6 +49,58 @@ namespace AlgoArena.Persistence.Repositories.Problems
                     cancellationToken);
         }
 
+
+
+        /// <summary>
+        /// Retrieves all published non-deleted problems for learner-facing pages.
+        /// </summary>
+        public async Task<IReadOnlyList<Problem>> GetPublishedAsync(
+            CancellationToken cancellationToken)
+        {
+            return await _dbContext.Problems
+                .AsNoTracking()
+                .Where(problem =>
+                    !problem.IsDeleted &&
+                    problem.IsPublished)
+                .Include(problem => problem.ProgrammingDomain)
+                .Include(problem => problem.DifficultyLevel)
+                .Include(problem => problem.ProblemTags)
+                    .ThenInclude(problemTag => problemTag.Tag)
+                .Include(problem => problem.ProblemArticles)
+                .Include(problem => problem.ProblemVideos)
+                .OrderBy(problem => problem.Title)
+                .ToListAsync(cancellationToken);
+        }
+
+        /// <summary>
+        /// Retrieves one published non-deleted problem by slug for the solving page.
+        /// </summary>
+        public async Task<Problem?> GetBySlugAsync(
+            string slug,
+            CancellationToken cancellationToken)
+        {
+            slug = slug.Trim().ToLowerInvariant();
+
+            return await _dbContext.Problems
+                .AsNoTracking()
+                .Where(problem =>
+                    !problem.IsDeleted &&
+                    problem.IsPublished &&
+                    problem.Slug == slug)
+                .Include(problem => problem.ProgrammingDomain)
+                .Include(problem => problem.DifficultyLevel)
+                .Include(problem => problem.ProblemTags)
+                    .ThenInclude(problemTag => problemTag.Tag)
+                .Include(problem => problem.ProblemExamples)
+                .Include(problem => problem.ProblemHints)
+                .Include(problem => problem.ProblemBoilerplates)
+                    .ThenInclude(boilerplate => boilerplate.ProgrammingLanguage)
+                .Include(problem => problem.ProblemArticles)
+                .Include(problem => problem.ProblemVideos)
+                .Include(problem => problem.ProblemTestCases)
+                .FirstOrDefaultAsync(cancellationToken);
+        }
+
         /// <summary>
         /// Determines whether a slug already exists.
         /// </summary>

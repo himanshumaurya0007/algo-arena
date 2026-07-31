@@ -65,6 +65,10 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: '/user/problems/:slug',
+    element: <CodeEditorPage />,
+  },
+  {
     path: '/admin',
     element: <AdminLayout />,
     children: [

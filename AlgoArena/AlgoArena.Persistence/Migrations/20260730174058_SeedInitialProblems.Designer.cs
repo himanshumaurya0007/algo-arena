@@ -4,6 +4,7 @@ using AlgoArena.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlgoArena.Persistence.Migrations
 {
     [DbContext(typeof(AlgoArenaDbContext))]
-    partial class AlgoArenaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260730174058_SeedInitialProblems")]
+    partial class SeedInitialProblems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1443,8 +1446,8 @@ namespace AlgoArena.Persistence.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             ProblemId = new Guid("dddddddd-dddd-dddd-dddd-ddddddddddd1"),
-                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1"),
-                            TemplateCode = "#include <stdio.h>\n\nint main()\n{\n    // Write your solution here\n    return 0;\n}"
+                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb6"),
+                            TemplateCode = "function solve(input) {\n  // Write your solution here\n}"
                         },
                         new
                         {
@@ -1452,8 +1455,8 @@ namespace AlgoArena.Persistence.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             ProblemId = new Guid("dddddddd-dddd-dddd-dddd-ddddddddddd1"),
-                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb2"),
-                            TemplateCode = "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  // Write your solution here\n  return 0;\n}"
+                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb3"),
+                            TemplateCode = "class Solution {\n  public static void main(String[] args) {\n    // Write your solution here\n  }\n}"
                         },
                         new
                         {
@@ -1461,8 +1464,17 @@ namespace AlgoArena.Persistence.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             ProblemId = new Guid("dddddddd-dddd-dddd-dddd-ddddddddddd1"),
-                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb3"),
-                            TemplateCode = "class Solution {\n  public static void main(String[] args) {\n    // Write your solution here\n  }\n}"
+                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb2"),
+                            TemplateCode = "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  // Write your solution here\n  return 0;\n}"
+                        },
+                        new
+                        {
+                            Id = new Guid("b1111111-1111-1111-1111-111111111114"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ProblemId = new Guid("dddddddd-dddd-dddd-dddd-ddddddddddd1"),
+                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb4"),
+                            TemplateCode = "def solve():\n    # Write your solution here\n    pass\n\nsolve()"
                         },
                         new
                         {
@@ -1470,26 +1482,8 @@ namespace AlgoArena.Persistence.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             ProblemId = new Guid("dddddddd-dddd-dddd-dddd-ddddddddddd2"),
-                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1"),
-                            TemplateCode = "#include <stdio.h>\n\nint main()\n{\n    // Write your solution here\n    return 0;\n}"
-                        },
-                        new
-                        {
-                            Id = new Guid("b2222222-2222-2222-2222-222222222222"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            ProblemId = new Guid("dddddddd-dddd-dddd-dddd-ddddddddddd2"),
-                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb2"),
-                            TemplateCode = "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  // Write your solution here\n  return 0;\n}"
-                        },
-                        new
-                        {
-                            Id = new Guid("b2222222-2222-2222-2222-222222222223"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            ProblemId = new Guid("dddddddd-dddd-dddd-dddd-ddddddddddd2"),
-                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb3"),
-                            TemplateCode = "class Solution {\n  public static void main(String[] args) {\n    // Write your solution here\n  }\n}"
+                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb6"),
+                            TemplateCode = "function solve(input) {\n  // Write your solution here\n}"
                         },
                         new
                         {
@@ -1497,26 +1491,8 @@ namespace AlgoArena.Persistence.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             ProblemId = new Guid("dddddddd-dddd-dddd-dddd-ddddddddddd3"),
-                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1"),
-                            TemplateCode = "#include <stdio.h>\n\nint main()\n{\n    // Write your solution here\n    return 0;\n}"
-                        },
-                        new
-                        {
-                            Id = new Guid("b3333333-3333-3333-3333-333333333332"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            ProblemId = new Guid("dddddddd-dddd-dddd-dddd-ddddddddddd3"),
-                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb2"),
-                            TemplateCode = "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  // Write your solution here\n  return 0;\n}"
-                        },
-                        new
-                        {
-                            Id = new Guid("b3333333-3333-3333-3333-333333333333"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            ProblemId = new Guid("dddddddd-dddd-dddd-dddd-ddddddddddd3"),
-                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb3"),
-                            TemplateCode = "class Solution {\n  public static void main(String[] args) {\n    // Write your solution here\n  }\n}"
+                            ProgrammingLanguageId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb6"),
+                            TemplateCode = "function solve(input) {\n  // Write your solution here\n}"
                         });
                 });
 
