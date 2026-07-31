@@ -1,7 +1,4 @@
-/**
- * Main Application Component
- * Defines routing for AlgoArena Demo Login & User Profile.
- */
+
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 import DemoLoginPage from '../pages/auth/DemoLoginPage';
@@ -22,6 +19,4 @@ function App() {
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
-}
 
-export default App;
