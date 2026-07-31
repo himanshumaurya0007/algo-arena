@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { FiCheckCircle, FiXCircle, FiClock } from 'react-icons/fi';
-import Badge from '../../../shared/ui/Badge';
 
 dayjs.extend(relativeTime);
 
@@ -111,4 +110,5 @@ function ProfileActivity() {
 }
 
 export default ProfileActivity;
+
 

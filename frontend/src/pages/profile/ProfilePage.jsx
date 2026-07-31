@@ -7,7 +7,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'react-hot-toast';
-import { FiEye, FiEdit3, FiUser, FiLogOut, FiHome } from 'react-icons/fi';
+import { FiEye, FiEdit3, FiLogOut } from 'react-icons/fi';
 
 import Sidebar from './components/Sidebar';
 import UserSelector from './components/UserSelector';
@@ -162,3 +162,4 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
+

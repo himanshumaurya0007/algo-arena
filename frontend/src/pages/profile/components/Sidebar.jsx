@@ -6,14 +6,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
-  FiGrid,
-  FiCode,
-  FiBook,
-  FiVideo,
-  FiFileText,
-  FiAward,
   FiUser,
-  FiSettings,
   FiLogOut,
   FiMenu,
   FiX,
@@ -127,3 +120,4 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
