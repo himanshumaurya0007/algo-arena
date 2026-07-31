@@ -9,14 +9,12 @@ import {
   FiMail,
   FiPhone,
   FiMapPin,
-  FiCalendar,
   FiBriefcase,
   FiBookOpen,
   FiGlobe,
   FiAward,
   FiCode,
   FiExternalLink,
-  FiFileText,
   FiCheckCircle,
   FiGithub,
   FiLinkedin,
@@ -25,8 +23,6 @@ import {
   FiYoutube,
   FiEdit3,
   FiLayers,
-  FiDollarSign,
-  FiHeart,
 } from 'react-icons/fi';
 
 const socialIconMap = {
@@ -537,3 +533,4 @@ function ProfileOverview({ data, onEditClick }) {
 }
 
 export default ProfileOverview;
+

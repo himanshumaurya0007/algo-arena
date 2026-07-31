@@ -15,9 +15,7 @@ import {
   FiLock,
   FiCheckCircle,
   FiCpu,
-  FiCheck,
   FiAward,
-  FiGlobe,
 } from 'react-icons/fi';
 import { AVAILABLE_USERS } from '../profile/data/dummyProfileData';
 
@@ -387,3 +385,4 @@ function DemoLoginPage() {
 }
 
 export default DemoLoginPage;
+

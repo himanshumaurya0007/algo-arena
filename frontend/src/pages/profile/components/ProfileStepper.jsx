@@ -7,7 +7,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
-import { FiSave, FiArrowLeft, FiArrowRight, FiCheck, FiSend } from 'react-icons/fi';
+import { FiSave, FiArrowLeft, FiArrowRight, FiSend } from 'react-icons/fi';
 
 import ProgressStepper from './ProgressStepper';
 import BasicDetails from './BasicDetails';
@@ -28,7 +28,7 @@ function ProfileStepper({ username }) {
   const [isSaving, setIsSaving] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
-  const [touchedFields, setTouchedFields] = useState({});
+  const [, setTouchedFields] = useState({});
 
   // Load profile data on mount
   useEffect(() => {
@@ -312,4 +312,5 @@ function ProfileStepper({ username }) {
 }
 
 export default ProfileStepper;
+
 
