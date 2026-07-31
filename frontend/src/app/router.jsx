@@ -16,6 +16,8 @@ import AdminAddProblemPage from '../features/admin/problems/pages/AdminAddProble
 import AdminProblemsPage from '../features/admin/problems/pages/AdminProblemsPage';
 import ProblemArticlePage from '../features/learning/articles/pages/ProblemArticlePage';
 import ArticlesPage from '../features/learning/articles/pages/ArticlesPage';
+import AdminArticlesPage from '../features/admin/articles/pages/AdminArticlesPage';
+import AdminArticleFormPage from '../features/admin/articles/pages/AdminArticleFormPage';
 
 const router = createBrowserRouter([
   {
@@ -93,6 +95,18 @@ const router = createBrowserRouter([
       {
         path: 'problems/new',
         element: <AdminAddProblemPage />,
+      },
+      {
+        path: 'articles',
+        element: <AdminArticlesPage />,
+      },
+      {
+        path: 'articles/new',
+        element: <AdminArticleFormPage />,
+      },
+      {
+        path: 'articles/:id/edit',
+        element: <AdminArticleFormPage />,
       },
     ],
   },
