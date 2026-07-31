@@ -3,6 +3,7 @@ using AlgoArena.Application.Features.Problems.Queries.GetProblemBySlug;
 using AlgoArena.Application.Features.Problems.Queries.GetPublishedProblems;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using AlgoArena.Application.Features.Problems.Queries.GetPrimaryArticleByProblemSlug;
 
 namespace AlgoArena.API.Controllers
 {
@@ -43,6 +44,24 @@ namespace AlgoArena.API.Controllers
             }
 
             return Ok(problem);
+        }
+
+
+        [HttpGet("{slug}/article")]
+        public async Task<ActionResult<ProblemArticleDto>> GetPrimaryArticle(
+            string slug,
+            CancellationToken cancellationToken)
+        {
+            var article = await _mediator.Send(
+                new GetPrimaryArticleByProblemSlugQuery(slug),
+                cancellationToken);
+
+            if (article is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(article);
         }
     }
 }

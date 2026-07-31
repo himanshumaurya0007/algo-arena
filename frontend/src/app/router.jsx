@@ -14,6 +14,8 @@ import AdminDashboardPage from '../features/admin/pages/AdminDashboardPage';
 import AdminLayout from '../layouts/AdminLayout';
 import AdminAddProblemPage from '../features/admin/problems/pages/AdminAddProblemPage';
 import AdminProblemsPage from '../features/admin/problems/pages/AdminProblemsPage';
+import ProblemArticlePage from '../features/learning/articles/pages/ProblemArticlePage';
+import ArticlesPage from '../features/learning/articles/pages/ArticlesPage';
 
 const router = createBrowserRouter([
   {
@@ -61,6 +63,14 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <UserDashboardPage />,
+      },
+      {
+        path: 'articles',
+        element: <ArticlesPage />,
+      },
+      {
+        path: 'articles/:slug',
+        element: <ProblemArticlePage />,
       },
     ],
   },

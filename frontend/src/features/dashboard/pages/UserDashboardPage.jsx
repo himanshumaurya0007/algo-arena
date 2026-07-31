@@ -248,6 +248,10 @@ function UserDashboardPage() {
                     <td className="px-5 py-4">
                       <Link
                         className="text-primary text-sm font-semibold hover:underline"
+                        state={{
+                          backLabel: 'Back to dashboard',
+                          backTo: '/user/dashboard',
+                        }}
                         to={`/user/articles/${problem.slug}`}
                       >
                         Read Article

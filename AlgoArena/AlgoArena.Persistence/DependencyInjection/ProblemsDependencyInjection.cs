@@ -13,6 +13,7 @@ namespace AlgoArena.Persistence.DependencyInjection
             this IServiceCollection services)
         {
             services.AddScoped<IProblemRepository, ProblemRepository>();
+            services.AddScoped<IProblemArticleRepository, ProblemArticleRepository>();
 
             return services;
         }
