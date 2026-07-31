@@ -48,18 +48,18 @@ const submissions = [
 
 function LandingPage() {
   return (
-    <main className="mx-auto max-w-7xl px-6 py-12">
+    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:py-12">
       <motion.section
         animate={{ opacity: 1, y: 0 }}
-        className="border-border bg-surface shadow-card grid gap-10 rounded-lg border px-6 py-10 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:px-10"
+        className="border-border bg-surface shadow-card grid gap-8 rounded-lg border px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-10 lg:px-10"
         initial={{ opacity: 0, y: 24 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="space-y-7">
+        <div className="space-y-6">
           <Badge>For students and early professionals</Badge>
 
           <div className="space-y-4">
-            <h1 className="font-heading text-primary text-4xl leading-tight font-extrabold md:text-6xl">
+            <h1 className="font-heading text-primary text-3xl leading-tight font-extrabold sm:text-4xl lg:text-6xl">
               Sharpen your coding skills with structured DSA practice.
             </h1>
 
@@ -69,17 +69,19 @@ function LandingPage() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-4">
-            <Link to="/login">
-              <Button>Start Practicing</Button>
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+            <Link className="sm:w-auto" to="/login">
+              <Button className="w-full sm:w-auto">Start Practicing</Button>
             </Link>
 
-            <Link to="/about">
-              <Button variant="outline">Explore Platform</Button>
+            <Link className="sm:w-auto" to="/about">
+              <Button className="w-full sm:w-auto" variant="outline">
+                Explore Platform
+              </Button>
             </Link>
           </div>
 
-          <div className="grid max-w-xl gap-4 sm:grid-cols-3">
+          <div className="grid max-w-xl grid-cols-1 gap-4 sm:grid-cols-3">
             <div>
               <p className="font-heading text-secondary text-2xl font-extrabold">
                 120+
@@ -104,11 +106,11 @@ function LandingPage() {
         </div>
 
         <motion.div
-          className="border-border bg-text text-surface shadow-card rounded-lg border p-5"
+          className="border-border bg-text text-surface shadow-card min-w-0 rounded-lg border p-4 sm:p-5"
           transition={{ type: 'spring', stiffness: 220 }}
           whileHover={{ y: -6 }}
         >
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm text-white/60">Today&apos;s challenge</p>
               <h2 className="font-heading text-2xl font-bold text-white">
@@ -129,7 +131,7 @@ function LandingPage() {
             </span>
           </div>
 
-          <pre className="code overflow-x-auto rounded-md bg-black/30 p-4 text-sm text-white">
+          <pre className="code max-w-full overflow-x-auto rounded-md bg-black/30 p-3 text-xs text-white sm:p-4 sm:text-sm">
             {`function twoSum(nums, target) {
   const seen = new Map();
 
@@ -145,7 +147,7 @@ function LandingPage() {
 }`}
           </pre>
 
-          <div className="mt-4 grid grid-cols-3 gap-3 text-center text-sm">
+          <div className="mt-4 grid grid-cols-1 gap-3 text-center text-sm sm:grid-cols-3">
             <div className="rounded-md bg-white/10 p-3">
               <p className="font-bold text-white">78%</p>
               <p className="text-white/60">Acceptance</p>
@@ -164,7 +166,7 @@ function LandingPage() {
         </motion.div>
       </motion.section>
 
-      <section className="mt-14 grid gap-4 md:grid-cols-3">
+      <section className="mt-10 grid gap-4 sm:mt-14 md:grid-cols-3">
         {features.map((feature) => (
           <Card className="space-y-3" key={feature.title}>
             <h2 className="heading-sm">{feature.title}</h2>
@@ -173,7 +175,7 @@ function LandingPage() {
         ))}
       </section>
 
-      <section className="mt-14">
+      <section className="mt-10 sm:mt-14">
         <div className="mb-6">
           <h2 className="heading-md">How AlgoArena works</h2>
           <p className="body text-text-muted mt-2">
@@ -181,7 +183,7 @@ function LandingPage() {
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
             <Card className="space-y-3" key={step}>
               <span className="bg-primary font-heading flex size-10 items-center justify-center rounded-md font-bold text-white">
@@ -193,7 +195,7 @@ function LandingPage() {
         </div>
       </section>
 
-      <section className="mt-14">
+      <section className="mt-10 sm:mt-14">
         <div className="mb-6">
           <h2 className="heading-md">Practice by topic</h2>
           <p className="body text-text-muted mt-2">
@@ -216,7 +218,7 @@ function LandingPage() {
         </div>
       </section>
 
-      <section className="mt-14 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+      <section className="mt-10 grid gap-6 sm:mt-14 lg:grid-cols-[0.9fr_1.1fr]">
         <Card className="space-y-5">
           <div>
             <p className="caption">Progress preview</p>
@@ -265,7 +267,7 @@ function LandingPage() {
           <div className="space-y-3">
             {submissions.map((submission) => (
               <div
-                className="border-border flex items-center justify-between rounded-md border px-4 py-3"
+                className="border-border flex flex-col gap-3 rounded-md border px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
                 key={submission.problem}
               >
                 <div>
@@ -286,8 +288,8 @@ function LandingPage() {
         </Card>
       </section>
 
-      <section className="bg-primary mt-14 rounded-lg px-6 py-10 text-center text-white">
-        <h2 className="font-heading text-3xl font-extrabold">
+      <section className="bg-primary mt-10 rounded-lg px-4 py-8 text-center text-white sm:mt-14 sm:px-6 sm:py-10">
+        <h2 className="font-heading text-2xl font-extrabold sm:text-3xl">
           Ready to enter the arena?
         </h2>
 
