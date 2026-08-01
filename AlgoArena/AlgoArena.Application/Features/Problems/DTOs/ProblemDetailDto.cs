@@ -24,6 +24,8 @@
 
         public IReadOnlyList<ProblemExampleDto> Examples { get; set; } = [];
 
+        public IReadOnlyList<ProblemPublicTestCaseDto> TestCases { get; set; } = [];
+
         public IReadOnlyList<ProblemBoilerplateDto> Boilerplates { get; set; } = [];
 
         public IReadOnlyList<ProblemArticleSummaryDto> Articles { get; set; } = [];
@@ -42,6 +44,16 @@
         public string? Explanation { get; set; }
     }
 
+    public sealed class ProblemPublicTestCaseDto
+    {
+        public short DisplayOrder { get; set; }
+
+        public string Input { get; set; } = string.Empty;
+
+        public string ExpectedOutput { get; set; } = string.Empty;
+
+        public bool IsHidden { get; set; }
+    }
     public sealed class ProblemBoilerplateDto
     {
         public string ProgrammingLanguageName { get; set; } = string.Empty;
