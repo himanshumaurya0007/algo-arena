@@ -4,60 +4,86 @@
 **/copy_and_paste_contents.py
 **/all_contents.txt
 
-# Logs
-logs
-*.log
+# .NET / Visual Studio / Rider
+**/bin/
+**/obj/
+**/.vs/
+**/.idea/
+**/.vscode/
+
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+**/*.DotSettings.user
+
+# .NET build / publish artifacts
+**/publish/
+**/Publish/
+**/artifacts/
+
+**/efbundle
+**/efbundle.exe
+
+**/*.nupkg
+**/*.snupkg
+
+# NuGet
+.nuget/
+
+# Frontend / Node.js
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/.vite/
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Environment variables / secrets
+**/.env
+**/.env.*
+**/*.env
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sw?
+# Safe templates may be committed
+!**/.env.example
+!**/.env.sample
 
-# Visual Studio
-**/.vs/
-**/bin/
-**/obj/
+# ASP.NET Core configuration
 
-# User-specific files
-**/*.user
-**/*.suo
-**/*.userosscache
-**/*.sln.docstates
+# Local-only configuration
+**/appsettings.Local.json
+**/appsettings.*.local.json
 
-# Rider
-**/.idea/
+# Production configuration may contain secrets
+**/appsettings.Production.json
 
-# VS Code
-**/.vscode/
+# Safe production configuration template
+!**/appsettings.Production.example.json
 
 # Logs
 **/*.log
+logs/
+**/logs/
 
-# NuGet
-**/*.nupkg
-
-# Environment files
-**/.env
-**/.env.*
-
-# Windows
+# OS-specific files
 **/Thumbs.db
 **/Desktop.ini
+**/.DS_Store
+**/*.lnk
 
-# Git
+# Temporary / generated files
+**/*.tmp
+**/*.temp
+**/*.bak
+**/*.swp
+**/*.swo
 **/*.orig
+
+# Local databases
+**/*.db
+**/*.db-shm
+**/*.db-wal
