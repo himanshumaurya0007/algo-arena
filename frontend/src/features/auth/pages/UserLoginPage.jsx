@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../shared/ui/Button";
 import { FaEye } from "react-icons/fa";
 import Card from "../../../shared/ui/Card";
+import { loginUser } from "../api/authApi";
 
 import {
   validateEmail,
@@ -11,6 +12,7 @@ import {
 
 function UserLoginPage() {
 
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -22,6 +24,8 @@ function UserLoginPage() {
   const [showModal, setShowModal] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [modalData, setModalData] = useState({
     type: "",
@@ -82,7 +86,7 @@ function UserLoginPage() {
 
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault();
 
@@ -116,22 +120,49 @@ function UserLoginPage() {
       return;
     }
 
-    // Success
+    try {
+      setIsLoading(true);
 
-    openModal(
-      "success",
-      "Login Successful!",
-      "Welcome back to AlgoArena. Happy coding!"
-    );
+      const response = await loginUser({
+        email: formData.email,
+        password: formData.password,
+      });
 
-    setFormData({
-      email: "",
-      password: ""
-    });
+      localStorage.setItem("token", response.token);
 
-    setErrors({});
+      if (response.expiresAt) {
+        localStorage.setItem("tokenExpiresAt", response.expiresAt);
+      }
 
-    setShowPassword(false);
+      openModal(
+        "success",
+        "Login Successful!",
+        "Welcome back to AlgoArena. Happy coding!"
+      );
+
+      setFormData({
+        email: "",
+        password: ""
+      });
+
+      setErrors({});
+
+      setShowPassword(false);
+
+      setTimeout(() => {
+        navigate("/user/dashboard");
+      }, 1200);
+    }
+    catch (error) {
+      openModal(
+        "error",
+        "Login Failed",
+        error.message || "Invalid email or password."
+      );
+    }
+    finally {
+      setIsLoading(false);
+    }
 
 
   };
@@ -269,9 +300,10 @@ function UserLoginPage() {
 
         <Button
           className="w-full"
+          disabled={isLoading}
           type="submit"
         >
-          Login as User
+          {isLoading ? "Logging in..." : "Login as User"}
         </Button>
 
       </form>
