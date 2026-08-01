@@ -22,9 +22,10 @@ namespace AlgoArena.Application.Features.Problems.Commands.CreateProblem
             CreateProblemCommand request,
             CancellationToken cancellationToken)
         {
+            var problemId = Guid.NewGuid();
             var problem = new Problem
             {
-                Id = Guid.NewGuid(),
+                Id = problemId,
 
                 ProgrammingDomainId = request.ProgrammingDomainId,
 
@@ -51,7 +52,50 @@ namespace AlgoArena.Application.Features.Problems.Commands.CreateProblem
 
                 SolvedCount = 0,
 
-                AttemptCount = 0
+                AttemptCount = 0,
+
+            ProblemTags = request.TagIds
+                .Distinct()
+                .Select(tagId => new ProblemTag
+                {
+                    ProblemId = problemId,
+                    TagId = tagId
+                })
+                .ToList(),
+
+            ProblemExamples = request.Examples
+                .Select(example => new ProblemExample
+                {
+                    Id = Guid.NewGuid(),
+                    ProblemId = problemId,
+                    DisplayOrder = example.DisplayOrder,
+                    Input = example.Input.Trim(),
+                    Output = example.Output.Trim(),
+                    Explanation = example.Explanation?.Trim()
+                })
+                .ToList(),
+
+            ProblemTestCases = request.TestCases
+                .Select(testCase => new ProblemTestCase
+                {
+                     Id = Guid.NewGuid(),
+                     ProblemId = problemId,
+                     DisplayOrder = testCase.DisplayOrder,
+                     Input = testCase.Input.Trim(),
+                     ExpectedOutput = testCase.ExpectedOutput.Trim(),
+                     IsHidden = testCase.IsHidden
+                })
+                .ToList(),
+
+            ProblemBoilerplates = request.Boilerplates
+                .Select(boilerplate => new ProblemBoilerplate
+                {
+                    Id = Guid.NewGuid(),
+                    ProblemId = problemId,
+                    ProgrammingLanguageId = boilerplate.ProgrammingLanguageId,
+                    TemplateCode = boilerplate.TemplateCode.Trim()
+                })
+                .ToList()
             };
 
             await _problemRepository.AddAsync(

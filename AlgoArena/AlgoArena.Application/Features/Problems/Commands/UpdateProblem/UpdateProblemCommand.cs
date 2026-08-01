@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using AlgoArena.Application.Features.Problems.DTOs;
 
 namespace AlgoArena.Application.Features.Problems.Commands.UpdateProblem
 {
@@ -24,5 +25,17 @@ namespace AlgoArena.Application.Features.Problems.Commands.UpdateProblem
         public int TimeLimitInMilliseconds { get; init; }
 
         public int MemoryLimitInMegabytes { get; init; }
+
+        public IReadOnlyList<Guid> TagIds { get; init; } =
+    [];
+
+        public IReadOnlyList<ProblemExampleRequest> Examples { get; init; } =
+            [];
+
+        public IReadOnlyList<ProblemTestCaseRequest> TestCases { get; init; } =
+            [];
+
+        public IReadOnlyList<ProblemBoilerplateRequest> Boilerplates { get; init; } =
+            [];
     }
 }
