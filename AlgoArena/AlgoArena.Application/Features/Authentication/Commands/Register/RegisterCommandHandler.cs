@@ -61,9 +61,9 @@ namespace AlgoArena.Application.Features.Authentication.Commands.Register
                 PasswordHash =
                     _passwordHasher.HashPassword(request.Password),
 
-                // Must exist in AccountStatuses table
+                // Must exist in AccountStatuses and Roles tables
                 AccountStatusId = Guid.Parse("33333333-3333-3333-3333-333333333333"),
-                 RoleId = Guid.Parse("11111111-1111-1111-1111-111111111111")
+                RoleId = Guid.Parse("22222222-2222-2222-2222-222222222222")
             };
 
 

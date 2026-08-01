@@ -16,8 +16,11 @@ namespace AlgoArena.Persistence.Repositories
 
         public async Task<User?> GetByEmailAsync(string email)
         {
+            email = email.Trim().ToLower();
+
             return await _dbContext.Users
-                .FirstOrDefaultAsync(u => u.Email == email);
+                .Include(user => user.Role)
+                .FirstOrDefaultAsync(user => user.Email == email);
         }
 
         public async Task<User?> GetByUsernameAsync(string username)

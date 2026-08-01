@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../shared/ui/Button";
 import Card from "../../../shared/ui/Card";
 import { FaEye } from "react-icons/fa";
+import { registerUser } from "../api/authApi";
 import {
   validateEmail,
   validatePassword,
@@ -29,6 +30,8 @@ function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [modalData, setModalData] = useState({
     type: "",
@@ -113,7 +116,7 @@ function SignupPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault();
 
@@ -158,36 +161,48 @@ function SignupPage() {
       return;
     }
 
-    localStorage.setItem(
-      "registeredUser",
-      JSON.stringify({
+    try {
+      setIsLoading(true);
+
+      await registerUser({
         username: formData.username,
         email: formData.email,
         password: formData.password,
-      })
-    );
+        confirmPassword: formData.confirmPassword,
+      });
 
-    openModal(
-      "success",
-      "Account Created!",
-      "Your account has been created successfully. Please login."
-    );
+      openModal(
+        "success",
+        "Account Created!",
+        "Your account has been created successfully. Please login."
+      );
 
-    setFormData({
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
 
-    setErrors({});
+      setErrors({});
 
-    setShowPassword(false);
-    setShowConfirmPassword(false);
+      setShowPassword(false);
+      setShowConfirmPassword(false);
 
-    setTimeout(() => {
-      navigate("/login/user");
-    }, 1000);
+      setTimeout(() => {
+        navigate("/login/user");
+      }, 1000);
+    }
+    catch (error) {
+      openModal(
+        "error",
+        "Registration Failed",
+        error.message || "Unable to create account right now."
+      );
+    }
+    finally {
+      setIsLoading(false);
+    }
   };
   return (
     <>
@@ -382,9 +397,10 @@ function SignupPage() {
 
             <Button
               className="w-full rounded-lg bg-amber-500 py-3 font-semibold text-black hover:bg-amber-400"
+              disabled={isLoading}
               type="submit"
             >
-              Create Account
+              {isLoading ? "Creating account..." : "Create Account"}
             </Button>
 
           </form>

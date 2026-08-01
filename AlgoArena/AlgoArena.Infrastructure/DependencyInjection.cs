@@ -1,9 +1,11 @@
 using AlgoArena.Application.Features.CodeExecution.Interfaces;
+using AlgoArena.Domain.Interfaces.Security;
 using AlgoArena.Infrastructure.Judge0;
+using AlgoArena.Infrastructure.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AlgoArena.Infrastructure
+namespace AlgoArena.Infrastructure.DependencyInjection
 {
     public static class DependencyInjection
     {
@@ -11,6 +13,9 @@ namespace AlgoArena.Infrastructure
             this IServiceCollection services,
             IConfiguration configuration)
         {
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
             services.Configure<Judge0Options>(
                 configuration.GetSection(Judge0Options.SectionName));
 
