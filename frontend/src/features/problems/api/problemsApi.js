@@ -29,3 +29,23 @@ export async function getPrimaryArticleByProblemSlug(slug) {
 
   return response.json();
 }
+
+export async function getProblemVideosBySlug(slug) {
+  const response = await fetch(`${API_BASE_URL}/problems/${slug}/videos`);
+
+  if (!response.ok) {
+    throw new Error('Unable to load videos right now.');
+  }
+
+  return response.json();
+}
+
+export async function getPublishedVideos() {
+  const response = await fetch(`${API_BASE_URL}/problems/videos`);
+
+  if (!response.ok) {
+    throw new Error('Unable to load videos right now.');
+  }
+
+  return response.json();
+}
