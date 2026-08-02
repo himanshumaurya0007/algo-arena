@@ -218,6 +218,9 @@ function ProblemsPage() {
                     <td className="px-5 py-4">
                       <Link
                         className="text-secondary text-sm font-semibold hover:underline"
+                        state={{
+                          from: '/user/problems',
+                        }}
                         to={`/user/videos/${problem.slug}`}
                       >
                         Watch Video

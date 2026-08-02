@@ -19,6 +19,10 @@ import ArticlesPage from '../features/learning/articles/pages/ArticlesPage';
 import AdminArticlesPage from '../features/admin/articles/pages/AdminArticlesPage';
 import AdminArticleFormPage from '../features/admin/articles/pages/AdminArticleFormPage';
 import ProblemsPage from '../features/problems/pages/ProblemsPage';
+import AdminVideoFormPage from '../features/admin/videos/pages/AdminVideoFormPage';
+import AdminVideosPage from '../features/admin/videos/pages/AdminVideosPage';
+import ProblemVideosPage from '../features/problems/videos/pages/ProblemVideosPage';
+import VideosPage from '../features/problems/videos/pages/VideosPage';
 
 const router = createBrowserRouter([
   {
@@ -79,6 +83,14 @@ const router = createBrowserRouter([
         path: 'articles/:slug',
         element: <ProblemArticlePage />,
       },
+      {
+        path: 'videos',
+        element: <VideosPage />,
+      },
+      {
+        path: 'videos/:slug',
+        element: <ProblemVideosPage />,
+      },
     ],
   },
   {
@@ -116,6 +128,18 @@ const router = createBrowserRouter([
       {
         path: 'articles/:id/edit',
         element: <AdminArticleFormPage />,
+      },
+      {
+        path: 'videos',
+        element: <AdminVideosPage />,
+      },
+      {
+        path: 'videos/new',
+        element: <AdminVideoFormPage />,
+      },
+      {
+        path: 'videos/:id/edit',
+        element: <AdminVideoFormPage />,
       },
     ],
   },
