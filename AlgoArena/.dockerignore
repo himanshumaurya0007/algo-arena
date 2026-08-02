@@ -1,0 +1,43 @@
+# Git
+.git
+.gitignore
+.github
+
+# .NET build output
+**/bin/
+**/obj/
+**/publish/
+**/artifacts/
+
+# Visual Studio / Rider / VS Code
+**/.vs/
+**/.idea/
+**/.vscode/
+
+# Environment / secrets
+**/.env
+**/.env.*
+**/appsettings.Production.json
+**/appsettings.Local.json
+
+# Logs
+**/*.log
+**/logs/
+
+# Frontend
+**/node_modules/
+**/dist/
+**/dist-ssr/
+
+# Temporary files
+**/*.tmp
+**/*.temp
+**/*.bak
+**/*.swp
+**/*.swo
+
+# OS files
+**/.DS_Store
+**/Thumbs.db
+**/Desktop.ini
+**/*.lnk
