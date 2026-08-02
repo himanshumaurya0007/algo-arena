@@ -7,7 +7,6 @@ const topLinks = [
   { label: 'Articles', path: '/admin/articles' },
   { label: 'Videos', path: '/admin/videos' },
   { label: 'Users', path: '/admin/users' },
-  { label: 'Videos', path: '/admin/videos' },
 ];
 
 const sideLinks = [
