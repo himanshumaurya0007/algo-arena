@@ -14,6 +14,7 @@ namespace AlgoArena.Persistence.DependencyInjection
         {
             services.AddScoped<IProblemRepository, ProblemRepository>();
             services.AddScoped<IProblemArticleRepository, ProblemArticleRepository>();
+            services.AddScoped<IProblemVideoRepository, ProblemVideoRepository>();
 
             return services;
         }

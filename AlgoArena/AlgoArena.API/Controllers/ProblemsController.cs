@@ -1,9 +1,12 @@
 ﻿using AlgoArena.Application.Features.Problems.DTOs;
+using AlgoArena.Application.Features.Problems.DTOs.Videos;
+using AlgoArena.Application.Features.Problems.Queries.GetPrimaryArticleByProblemSlug;
 using AlgoArena.Application.Features.Problems.Queries.GetProblemBySlug;
 using AlgoArena.Application.Features.Problems.Queries.GetPublishedProblems;
+using AlgoArena.Application.Features.Problems.Queries.GetVideosByProblemSlug;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using AlgoArena.Application.Features.Problems.Queries.GetPrimaryArticleByProblemSlug;
+using AlgoArena.Application.Features.Problems.Queries.GetPublishedVideos;
 
 namespace AlgoArena.API.Controllers
 {
@@ -27,6 +30,17 @@ namespace AlgoArena.API.Controllers
                 cancellationToken);
 
             return Ok(problems);
+        }
+
+        [HttpGet("videos")]
+        public async Task<ActionResult<IReadOnlyList<ProblemVideoDto>>> GetPublishedVideos(
+            CancellationToken cancellationToken)
+        {
+            var videos = await _mediator.Send(
+                new GetPublishedVideosQuery(),
+                cancellationToken);
+
+            return Ok(videos);
         }
 
         [HttpGet("{slug}")]
@@ -62,6 +76,18 @@ namespace AlgoArena.API.Controllers
             }
 
             return Ok(article);
+        }
+
+        [HttpGet("{slug}/videos")]
+        public async Task<ActionResult<IReadOnlyList<ProblemVideoDto>>> GetVideosByProblemSlug(
+            string slug,
+            CancellationToken cancellationToken)
+        {
+            var videos = await _mediator.Send(
+                new GetVideosByProblemSlugQuery(slug),
+                cancellationToken);
+
+            return Ok(videos);
         }
     }
 }
