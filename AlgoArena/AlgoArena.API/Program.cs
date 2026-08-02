@@ -77,8 +77,8 @@ namespace AlgoArena.API
             var app = builder.Build();
 
             // Swagger
-            if (app.Environment.IsDevelopment())
-            {
+            // if (app.Environment.IsDevelopment())
+            // {
                 app.UseSwagger();
 
                 app.UseSwaggerUI(options =>
@@ -89,16 +89,18 @@ namespace AlgoArena.API
                         "/swagger/v1/swagger.json",
                         "AlgoArena API v1");
                 });
-            }
+            // }
 
             // HTTPS
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             // CORS
             app.UseCors("FrontendPolicy");
 
-            // Authentication must come before Authorization
+            // Authentication
             app.UseAuthentication();
+
+            // Authorization
             app.UseAuthorization();
 
             // Controllers
