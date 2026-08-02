@@ -1,4 +1,5 @@
 ﻿using AlgoArena.Application.Features.Problems.Interfaces;
+using AlgoArena.Domain.Entities.Problems;
 using MediatR;
 
 namespace AlgoArena.Application.Features.Problems.Commands.UpdateProblem
@@ -53,6 +54,59 @@ namespace AlgoArena.Application.Features.Problems.Commands.UpdateProblem
             problem.MemoryLimitInMegabytes = request.MemoryLimitInMegabytes;
 
             problem.UpdatedAt = DateTime.UtcNow;
+            problem.ProblemTags.Clear();
+
+            foreach (var tagId in request.TagIds.Distinct())
+            {
+                problem.ProblemTags.Add(new ProblemTag
+                {
+                    ProblemId = problem.Id,
+                    TagId = tagId
+                });
+            }
+
+            problem.ProblemExamples.Clear();
+
+            foreach (var example in request.Examples)
+            {
+                problem.ProblemExamples.Add(new ProblemExample
+                {
+                    Id = Guid.NewGuid(),
+                    ProblemId = problem.Id,
+                    DisplayOrder = example.DisplayOrder,
+                    Input = example.Input.Trim(),
+                    Output = example.Output.Trim(),
+                    Explanation = example.Explanation?.Trim()
+                });
+            }
+
+            problem.ProblemTestCases.Clear();
+
+            foreach (var testCase in request.TestCases)
+            {
+                problem.ProblemTestCases.Add(new ProblemTestCase
+                {
+                    Id = Guid.NewGuid(),
+                    ProblemId = problem.Id,
+                    DisplayOrder = testCase.DisplayOrder,
+                    Input = testCase.Input.Trim(),
+                    ExpectedOutput = testCase.ExpectedOutput.Trim(),
+                    IsHidden = testCase.IsHidden
+                });
+            }
+
+            problem.ProblemBoilerplates.Clear();
+
+            foreach (var boilerplate in request.Boilerplates)
+            {
+                problem.ProblemBoilerplates.Add(new ProblemBoilerplate
+                {
+                    Id = Guid.NewGuid(),
+                    ProblemId = problem.Id,
+                    ProgrammingLanguageId = boilerplate.ProgrammingLanguageId,
+                    TemplateCode = boilerplate.TemplateCode.Trim()
+                });
+            }
 
             await _problemRepository.UpdateAsync(
                 problem,

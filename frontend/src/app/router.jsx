@@ -97,6 +97,10 @@ const router = createBrowserRouter([
         element: <AdminAddProblemPage />,
       },
       {
+        path: 'problems/:id/edit',
+        element: <AdminAddProblemPage />,
+      },
+      {
         path: 'articles',
         element: <AdminArticlesPage />,
       },

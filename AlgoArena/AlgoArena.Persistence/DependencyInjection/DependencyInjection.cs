@@ -4,6 +4,8 @@ using AlgoArena.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AlgoArena.Application.Features.Lookups.Interfaces;
+using AlgoArena.Persistence.Repositories.Lookups;
 
 namespace AlgoArena.Persistence.DependencyInjection
 {
@@ -25,6 +27,8 @@ namespace AlgoArena.Persistence.DependencyInjection
 
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<ILookupRepository, LookupRepository>();
 
             // Feature registrations
             services.AddProblemsPersistence();

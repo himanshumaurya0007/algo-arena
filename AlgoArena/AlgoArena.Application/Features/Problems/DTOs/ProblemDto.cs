@@ -27,5 +27,37 @@
         public int AttemptCount { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public IReadOnlyList<Guid> TagIds { get; set; } =
+    [];
+
+        public IReadOnlyList<ProblemExampleDto> Examples { get; set; } =
+            [];
+
+        public IReadOnlyList<ProblemTestCaseDto> TestCases { get; set; } =
+            [];
+
+        public IReadOnlyList<ProblemBoilerplateEditDto> Boilerplates { get; set; } =
+            [];
+    }
+
+    public sealed class ProblemTestCaseDto
+    {
+        public short DisplayOrder { get; set; }
+
+        public string Input { get; set; } = string.Empty;
+
+        public string ExpectedOutput { get; set; } = string.Empty;
+
+        public bool IsHidden { get; set; }
+    }
+
+    public sealed class ProblemBoilerplateEditDto
+    {
+        public Guid ProgrammingLanguageId { get; set; }
+
+        public string ProgrammingLanguageName { get; set; } = string.Empty;
+
+        public string TemplateCode { get; set; } = string.Empty;
     }
 }
