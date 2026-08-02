@@ -1,4 +1,4 @@
-name: Backend CD - SSH Test
+name: Backend CD
 
 on:
   push:
@@ -7,22 +7,103 @@ on:
 
 permissions:
   contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: himanshumaurya0007/algoarena-api
+  IMAGE_TAG: deploy-test
 
 jobs:
-  ssh-test:
-    name: Test VPS SSH Connectivity
+  build-and-push:
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test SSH connection to VPS
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker image
+        working-directory: AlgoArena
+        run: |
+          docker build \
+            -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} \
+            .
+
+      - name: Push Docker image
+        run: |
+          docker push \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
+  deploy:
+    name: Deploy API to VPS
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ vars.VPS_HOST }}
           username: ${{ vars.VPS_USER }}
           key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
           port: 22
+          script_stop: true
           script: |
-            echo "SSH connection successful"
-            echo "Connected user: $(whoami)"
-            echo "Hostname: $(hostname)"
-            echo "Working directory: $(pwd)"
+            set -e
+
+            echo "========================================="
+            echo "Starting AlgoArena API deployment"
+            echo "========================================="
+
+            cd ~/algoarena
+
+            echo "Current user:"
+            whoami
+
+            echo "Current hostname:"
+            hostname
+
+            echo "Current directory:"
+            pwd
+
+            echo "Docker version:"
+            docker --version
+
+            echo "Docker Compose version:"
+            docker compose version
+
+            echo "Pulling latest API image..."
+            docker pull ghcr.io/himanshumaurya0007/algoarena-api:deploy-test
+
+            echo "Starting API container..."
+            docker compose up -d
+
+            echo "Waiting for API container..."
+            sleep 10
+
+            echo "Container status:"
+            docker compose ps
+
+            echo "API container logs:"
+            docker compose logs --tail=50 api
+
+            echo "Testing API endpoint..."
+            curl --fail --silent --show-error \
+              http://localhost:8081/api/problems \
+              > /tmp/algoarena-api-response.json
+
+            echo "API response:"
+            cat /tmp/algoarena-api-response.json
+
+            echo
+            echo "========================================="
+            echo "AlgoArena API deployment successful"
+            echo "========================================="
