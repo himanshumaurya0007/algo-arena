@@ -2,10 +2,10 @@ using AlgoArena.Application.Features.CodeExecution.Models;
 
 namespace AlgoArena.Application.Features.CodeExecution.Interfaces
 {
-    public interface IJudge0Service
+    public interface IJDoodleService
     {
-        Task<Judge0Response> ExecuteAsync(
-            Judge0Request request,
+        Task<JDoodleResponse> ExecuteAsync(
+            JDoodleRequest request,
             CancellationToken cancellationToken = default);
     }
 }

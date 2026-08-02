@@ -13,7 +13,10 @@ function createBoilerplateMap(boilerplates = []) {
       languageNameToEditorValue[boilerplate.programmingLanguageName];
 
     if (editorLanguage) {
-      result[editorLanguage] = boilerplate.templateCode;
+      result[editorLanguage] = {
+        programmingLanguageId: boilerplate.programmingLanguageId,
+        templateCode: boilerplate.templateCode,
+      };
     }
 
     return result;
@@ -21,36 +24,55 @@ function createBoilerplateMap(boilerplates = []) {
 }
 
 const useEditor = (boilerplates = []) => {
-  const boilerplateCode = useMemo(
+  const boilerplateMap = useMemo(
     () => createBoilerplateMap(boilerplates),
     [boilerplates]
   );
 
   const [language, setLanguage] = useState('cpp');
+
+  const [programmingLanguageId, setProgrammingLanguageId] = useState('');
+
   const [theme, setTheme] = useState('vs-dark');
   const [fontSize, setFontSize] = useState(14);
   const [code, setCode] = useState(defaultCode.cpp);
 
   useEffect(() => {
-    const firstLanguage = Object.keys(boilerplateCode)[0];
+    const firstLanguage = Object.keys(boilerplateMap)[0];
 
     if (!firstLanguage) {
       return;
     }
 
+    const firstBoilerplate = boilerplateMap[firstLanguage];
+
     queueMicrotask(() => {
       setLanguage(firstLanguage);
-      setCode(boilerplateCode[firstLanguage]);
+
+      setProgrammingLanguageId(
+        firstBoilerplate.programmingLanguageId
+      );
+
+      setCode(firstBoilerplate.templateCode);
     });
-  }, [boilerplateCode]);
+  }, [boilerplateMap]);
 
   const changeLanguage = (newLanguage) => {
     setLanguage(newLanguage);
 
-    if (boilerplateCode[newLanguage]) {
-      setCode(boilerplateCode[newLanguage]);
+    const selectedBoilerplate = boilerplateMap[newLanguage];
+
+    if (selectedBoilerplate) {
+      setProgrammingLanguageId(
+        selectedBoilerplate.programmingLanguageId
+      );
+
+      setCode(selectedBoilerplate.templateCode);
+
       return;
     }
+
+    setProgrammingLanguageId('');
 
     if (defaultCode[newLanguage]) {
       setCode(defaultCode[newLanguage]);
@@ -67,6 +89,7 @@ const useEditor = (boilerplates = []) => {
 
   return {
     language,
+    programmingLanguageId,
     theme,
     fontSize,
     code,

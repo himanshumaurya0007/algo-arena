@@ -1,9 +1,10 @@
 using AlgoArena.Application.Features.CodeExecution.Interfaces;
 using AlgoArena.Domain.Interfaces.Security;
-using AlgoArena.Infrastructure.Judge0;
+using AlgoArena.Infrastructure.JDoodle;
 using AlgoArena.Infrastructure.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace AlgoArena.Infrastructure.DependencyInjection
 {
@@ -14,43 +15,44 @@ namespace AlgoArena.Infrastructure.DependencyInjection
             IConfiguration configuration)
         {
             services.AddScoped<IPasswordHasher, PasswordHasher>();
+
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
-            services.Configure<Judge0Options>(
-                configuration.GetSection(Judge0Options.SectionName));
+            // JDoodle configuration
+            services.Configure<JDoodleOptions>(
+                configuration.GetSection(JDoodleOptions.SectionName));
 
-            services.AddHttpClient<IJudge0Service, Judge0Service>(
+            // JDoodle HTTP client
+            services.AddHttpClient<IJDoodleService, JDoodleService>(
                 (serviceProvider, client) =>
                 {
                     var options = serviceProvider
-                        .GetRequiredService<
-                            Microsoft.Extensions.Options.IOptions<Judge0Options>>()
+                        .GetRequiredService<IOptions<JDoodleOptions>>()
                         .Value;
 
                     if (string.IsNullOrWhiteSpace(options.BaseUrl))
                     {
                         throw new InvalidOperationException(
-                            "Judge0 BaseUrl is not configured.");
+                            "JDoodle BaseUrl is not configured.");
                     }
 
-                    client.BaseAddress = new Uri(
-                        options.BaseUrl.TrimEnd('/') + "/");
-
-                    client.Timeout = TimeSpan.FromSeconds(30);
-
-                    if (!string.IsNullOrWhiteSpace(options.ApiKey))
+                    if (string.IsNullOrWhiteSpace(options.ClientId))
                     {
-                        client.DefaultRequestHeaders.TryAddWithoutValidation(
-                            "X-RapidAPI-Key",
-                            options.ApiKey);
+                        throw new InvalidOperationException(
+                            "JDoodle ClientId is not configured.");
                     }
 
-                    if (!string.IsNullOrWhiteSpace(options.ApiHost))
+                    if (string.IsNullOrWhiteSpace(options.ClientSecret))
                     {
-                        client.DefaultRequestHeaders.TryAddWithoutValidation(
-                            "X-RapidAPI-Host",
-                            options.ApiHost);
+                        throw new InvalidOperationException(
+                            "JDoodle ClientSecret is not configured.");
                     }
+
+                    client.BaseAddress =
+                        new Uri(options.BaseUrl.TrimEnd('/') + "/");
+
+                    client.Timeout =
+                        TimeSpan.FromSeconds(30);
                 });
 
             return services;

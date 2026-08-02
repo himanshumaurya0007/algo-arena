@@ -9,14 +9,14 @@ namespace AlgoArena.Application.Features.CodeExecution.Commands.RunCode
     public sealed class RunCodeCommandHandler
         : IRequestHandler<RunCodeCommand, RunCodeResponse>
     {
-        private readonly IJudge0Service _judge0Service;
+        private readonly IJDoodleService _jdoodleService;
         private readonly IProblemRepository _problemRepository;
 
         public RunCodeCommandHandler(
-            IJudge0Service judge0Service,
+            IJDoodleService jdoodleService,
             IProblemRepository problemRepository)
         {
-            _judge0Service = judge0Service;
+            _jdoodleService = jdoodleService;
             _problemRepository = problemRepository;
         }
 
@@ -58,11 +58,12 @@ namespace AlgoArena.Application.Features.CodeExecution.Commands.RunCode
                 };
             }
 
-            // 3. Get Judge0 language ID
-            var languageId = GetJudge0LanguageId(
-                boilerplate.ProgrammingLanguage.Name);
+            // 3. Get JDoodle language configuration
+            var languageConfiguration =
+                GetJDoodleLanguageConfiguration(
+                    boilerplate.ProgrammingLanguage.Name);
 
-            if (languageId is null)
+            if (languageConfiguration is null)
             {
                 return new RunCodeResponse
                 {
@@ -70,62 +71,136 @@ namespace AlgoArena.Application.Features.CodeExecution.Commands.RunCode
                     IsAccepted = false,
                     Status = "Unsupported Language",
                     ErrorMessage =
-                        $"Judge0 language mapping is not configured for '{boilerplate.ProgrammingLanguage.Name}'."
+                        $"JDoodle execution is currently supported only for C, C++ and Java."
                 };
             }
 
-            // 4. Prepare Judge0 request
-            var judgeRequest = new Judge0Request
+            // 4. Prepare JDoodle request
+            var jdoodleRequest = new JDoodleRequest
             {
                 SourceCode = request.Request.SourceCode,
-                LanguageId = languageId.Value,
+                Language = languageConfiguration.Value.Language,
+                VersionIndex = languageConfiguration.Value.VersionIndex,
                 Stdin = request.Request.CustomInput,
-                CpuTimeLimit =
-                    problem.TimeLimitInMilliseconds / 1000.0,
-                MemoryLimit =
-                    problem.MemoryLimitInMegabytes * 1024
+                CompileOnly = false
             };
 
-            // 5. Execute code through Judge0
-            var result = await _judge0Service.ExecuteAsync(
-                judgeRequest,
-                cancellationToken);
+            // 5. Execute code through JDoodle
+            JDoodleResponse result;
 
-            // 6. Determine result
+            try
+            {
+                result = await _jdoodleService.ExecuteAsync(
+                    jdoodleRequest,
+                    cancellationToken);
+            }
+            catch (HttpRequestException ex)
+            {
+                return new RunCodeResponse
+                {
+                    IsSuccess = false,
+                    IsAccepted = false,
+                    Status = "JDoodle Error",
+                    ErrorMessage =
+                        $"Unable to communicate with JDoodle: {ex.Message}"
+                };
+            }
+            catch (TaskCanceledException)
+            {
+                return new RunCodeResponse
+                {
+                    IsSuccess = false,
+                    IsAccepted = false,
+                    Status = "Execution Timeout",
+                    ErrorMessage =
+                        "The request to JDoodle timed out."
+                };
+            }
+
+            // 6. Determine execution status
+            var hasError =
+                !string.IsNullOrWhiteSpace(result.Error);
+
             var isAccepted =
-                result.StatusId == 3;
+                !hasError &&
+                result.StatusCode == 200;
 
+            // 7. Convert JDoodle response into AlgoArena response
             return new RunCodeResponse
             {
                 IsSuccess = true,
                 IsAccepted = isAccepted,
-                Status = result.StatusDescription ?? "Unknown",
-                StandardOutput = result.StandardOutput,
-                StandardError = result.StandardError,
-                CompilationOutput = result.CompilationOutput,
+
+                Status = hasError
+                    ? "Runtime / Compilation Error"
+                    : "Accepted",
+
+                StandardOutput = result.Output,
+
+                StandardError = result.Error,
+
+                CompilationOutput = result.Error,
+
                 ExecutionTimeInMilliseconds =
-                    result.ExecutionTimeInSeconds.HasValue
-                        ? result.ExecutionTimeInSeconds.Value * 1000
-                        : null,
+                    ParseCpuTimeToMilliseconds(result.CpuTime),
+
                 MemoryUsedInKilobytes =
-                    result.MemoryInKilobytes,
-                ErrorMessage = result.Message
+                    ParseMemoryToKilobytes(result.Memory),
+
+                ErrorMessage = hasError
+                    ? result.Error
+                    : null
             };
         }
 
-        private static int? GetJudge0LanguageId(
-            string languageName)
+        private static (string Language, string VersionIndex)?
+            GetJDoodleLanguageConfiguration(
+                string languageName)
         {
             return languageName.Trim().ToLowerInvariant() switch
             {
-                "c" => 50,
-                "c++" => 54,
-                "java" => 62,
-                "python" => 71,
-                "c#" => 51,
-                "javascript" => 63,
+                "c" => ("c", "5"),
+
+                "c++" => ("cpp", "5"),
+
+                "java" => ("java", "5"),
+
                 _ => null
             };
+        }
+
+        private static decimal? ParseCpuTimeToMilliseconds(
+            string? cpuTime)
+        {
+            if (string.IsNullOrWhiteSpace(cpuTime))
+            {
+                return null;
+            }
+
+            if (decimal.TryParse(
+                cpuTime,
+                out var seconds))
+            {
+                return seconds * 1000;
+            }
+
+            return null;
+        }
+
+        private static int? ParseMemoryToKilobytes(
+            string? memory)
+        {
+            if (string.IsNullOrWhiteSpace(memory))
+            {
+                return null;
+            }
+
+            if (int.TryParse(memory, out var value))
+            {
+                return value;
+            }
+
+            return null;
         }
     }
 }

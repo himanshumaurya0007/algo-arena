@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5036/api';
+const API_BASE_URL = 'https://localhost:7234/api';
 
 export async function getPublishedProblems() {
   const response = await fetch(`${API_BASE_URL}/problems`);
@@ -21,7 +21,9 @@ export async function getProblemBySlug(slug) {
 }
 
 export async function getPrimaryArticleByProblemSlug(slug) {
-  const response = await fetch(`${API_BASE_URL}/problems/${slug}/article`);
+  const response = await fetch(
+    `${API_BASE_URL}/problems/${slug}/article`
+  );
 
   if (!response.ok) {
     throw new Error('Failed to fetch article');
@@ -31,7 +33,9 @@ export async function getPrimaryArticleByProblemSlug(slug) {
 }
 
 export async function getProblemVideosBySlug(slug) {
-  const response = await fetch(`${API_BASE_URL}/problems/${slug}/videos`);
+  const response = await fetch(
+    `${API_BASE_URL}/problems/${slug}/videos`
+  );
 
   if (!response.ok) {
     throw new Error('Unable to load videos right now.');
@@ -41,7 +45,9 @@ export async function getProblemVideosBySlug(slug) {
 }
 
 export async function getPublishedVideos() {
-  const response = await fetch(`${API_BASE_URL}/problems/videos`);
+  const response = await fetch(
+    `${API_BASE_URL}/problems/videos`
+  );
 
   if (!response.ok) {
     throw new Error('Unable to load videos right now.');
