@@ -53,6 +53,17 @@ namespace AlgoArena.Application.Features.Problems.Queries.GetProblemBySlug
                         Explanation = example.Explanation
                     })
                     .ToList(),
+                TestCases = problem.ProblemTestCases
+                    .Where(testCase => !testCase.IsHidden)
+                    .OrderBy(testCase => testCase.DisplayOrder)
+                    .Select(testCase => new ProblemPublicTestCaseDto
+                    {
+                        DisplayOrder = testCase.DisplayOrder,
+                        Input = testCase.Input,
+                        ExpectedOutput = testCase.ExpectedOutput,
+                        IsHidden = testCase.IsHidden
+                    })
+                    .ToList(),
                 Boilerplates = problem.ProblemBoilerplates
                     .Select(boilerplate => new ProblemBoilerplateDto
                     {
