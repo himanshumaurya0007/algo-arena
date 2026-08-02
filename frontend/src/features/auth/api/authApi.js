@@ -1,4 +1,4 @@
-// const API_BASE_URL = 'http://localhost:5036/api';
+// import API_BASE_URL from '../../../shared/api/apiClient';
 
 // export async function loginUser(credentials) {
 //   const response = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -35,7 +35,8 @@
 
 //   return data;
 // }
-const API_BASE_URL = "http://localhost:5036/api";
+
+import API_BASE_URL from '../../../shared/api/apiClient';
 
 // ===========================
 // User Login

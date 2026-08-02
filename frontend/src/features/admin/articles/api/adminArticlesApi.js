@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5036/api';
+import API_BASE_URL from '../../../../shared/api/apiClient';
 
 export async function getAdminArticles() {
   const response = await fetch(`${API_BASE_URL}/admin/articles`);
