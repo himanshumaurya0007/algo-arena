@@ -3,9 +3,9 @@ import ScrollToTop from '../shared/components/ScrollToTop';
 
 const topLinks = [
   { label: 'Dashboard', path: '/user/dashboard' },
-  { label: 'Problems', path: '/user/dashboard' },
+  { label: 'Problems', path: '/user/problems' },
   { label: 'Articles', path: '/user/articles' },
-  { label: 'Videos', path: '/user/dashboard' },
+  { label: 'Videos', path: '/user/videos' },
 ];
 
 function DashboardLayout() {

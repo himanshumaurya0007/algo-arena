@@ -18,6 +18,7 @@ import ProblemArticlePage from '../features/learning/articles/pages/ProblemArtic
 import ArticlesPage from '../features/learning/articles/pages/ArticlesPage';
 import AdminArticlesPage from '../features/admin/articles/pages/AdminArticlesPage';
 import AdminArticleFormPage from '../features/admin/articles/pages/AdminArticleFormPage';
+import ProblemsPage from '../features/problems/pages/ProblemsPage';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <UserDashboardPage />,
+      },
+      {
+        path: 'problems',
+        element: <ProblemsPage />,
       },
       {
         path: 'articles',
