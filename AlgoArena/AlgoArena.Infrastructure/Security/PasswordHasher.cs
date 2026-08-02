@@ -1,4 +1,5 @@
-﻿using AlgoArena.Domain.Entities.Identity;
+﻿
+using AlgoArena.Domain.Entities.Identity;
 using AlgoArena.Domain.Interfaces.Security;
 using Microsoft.AspNetCore.Identity;
 
@@ -26,6 +27,21 @@ namespace AlgoArena.Infrastructure.Security
         public bool VerifyPassword(User user, string password, string passwordHash)
         {
             var result = _passwordHasher.VerifyHashedPassword(user, passwordHash, password);
+            return result == PasswordVerificationResult.Success
+                || result == PasswordVerificationResult.SuccessRehashNeeded;
+        }
+
+
+        // Required by AdminLoginCommandHandler
+        public bool VerifyPassword(
+            string password,
+            string passwordHash)
+        {
+            var result =
+                _passwordHasher.VerifyHashedPassword(
+                    new User(),
+                    passwordHash,
+                    password);
 
             return result == PasswordVerificationResult.Success
                 || result == PasswordVerificationResult.SuccessRehashNeeded;
