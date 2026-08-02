@@ -63,6 +63,7 @@ function UserDashboardPage() {
   const [problems, setProblems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const recommendedProblems = problems.slice(0, 8);
 
   useEffect(() => {
     async function loadProblems() {
@@ -206,7 +207,7 @@ function UserDashboardPage() {
 
               {!isLoading &&
                 !error &&
-                problems.map((problem) => (
+                recommendedProblems.map((problem) => (
                   <motion.tr
                     className="border-border hover:bg-background border-b transition last:border-b-0"
                     key={problem.id}
