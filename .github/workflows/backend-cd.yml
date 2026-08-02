@@ -71,7 +71,7 @@ jobs:
             echo "Current hostname:"
             hostname
 
-            echo "Current directory:"
+            echo "Current working directory:"
             pwd
 
             echo "Docker version:"
@@ -81,7 +81,7 @@ jobs:
             docker compose version
 
             echo "Pulling latest API image..."
-            docker pull ghcr.io/himanshumaurya0007/algoarena-api:deploy-test
+            docker compose pull api
 
             echo "Starting API container..."
             docker compose up -d
