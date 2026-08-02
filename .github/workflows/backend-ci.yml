@@ -33,4 +33,4 @@ jobs:
         run: dotnet restore
 
       - name: Build backend
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build AlgoArena.sln --configuration Release --no-restore
