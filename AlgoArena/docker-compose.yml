@@ -1,0 +1,17 @@
+services:
+  api:
+    image: algoarena-api:local
+    container_name: algoarena-api
+    restart: unless-stopped
+
+    ports:
+      - "8081:8080"
+
+    env_file:
+      - .env.production
+
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
