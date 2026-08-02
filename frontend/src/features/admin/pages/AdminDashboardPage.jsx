@@ -1,86 +1,55 @@
 import { motion } from 'framer-motion';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Badge from '../../../shared/ui/Badge';
 import Card from '../../../shared/ui/Card';
-import { Link } from 'react-router-dom';
+import { getAdminProblems } from '../problems/api/adminProblemsApi';
 
-const stats = [
+const dashboardActions = [
   {
-    label: 'Total Problems',
-    value: '128',
-    helper: 'Across 14 topics',
+    label: 'Problems',
+    value: 'Manage library',
+    helper: 'Create, edit, publish, or unpublish coding problems.',
+    path: '/admin/problems',
+    action: 'Open Problems',
     accent: 'from-sky-500/25',
   },
   {
-    label: 'Active Users',
-    value: '1,842',
-    helper: 'Practiced this month',
+    label: 'Articles',
+    value: 'Learning content',
+    helper: 'Attach explanations and notes to each problem.',
+    path: '/admin/articles',
+    action: 'Open Articles',
     accent: 'from-emerald-500/25',
   },
   {
-    label: 'Submissions',
-    value: '24.6k',
-    helper: 'Total code attempts',
+    label: 'Videos',
+    value: 'Walkthroughs',
+    helper: 'Manage embedded videos for problem learning pages.',
+    path: '/admin/videos',
+    action: 'Open Videos',
     accent: 'from-violet-500/25',
   },
   {
-    label: 'Pending Reviews',
-    value: '18',
-    helper: 'Content checks needed',
+    label: 'Create',
+    value: 'Add problem',
+    helper: 'Start a new problem with examples and test cases.',
+    path: '/admin/problems/new',
+    action: 'Add Problem',
     accent: 'from-amber-500/25',
   },
 ];
 
-const recentSubmissions = [
-  {
-    user: 'Aarav Sharma',
-    problem: 'Target Strike',
-    language: 'Java',
-    result: 'Accepted',
-    time: '2 min ago',
-  },
-  {
-    user: 'Neha Patil',
-    problem: 'Water Wall Collector',
-    language: 'C++',
-    result: 'Wrong Answer',
-    time: '9 min ago',
-  },
-  {
-    user: 'Rohan Verma',
-    problem: 'Product Trail',
-    language: 'JavaScript',
-    result: 'Accepted',
-    time: '14 min ago',
-  },
-  {
-    user: 'Isha Mehta',
-    problem: 'Longest Clean Segment',
-    language: 'Python',
-    result: 'Runtime Error',
-    time: '22 min ago',
-  },
-];
+const difficultyVariant = {
+  Easy: 'success',
+  Medium: 'warning',
+  Hard: 'danger',
+};
 
-const contentQueue = [
-  {
-    title: 'Graph Paths',
-    type: 'Problem',
-    status: 'Draft',
-    owner: 'Content Team',
-  },
-  {
-    title: 'Sliding Window Basics',
-    type: 'Article',
-    status: 'Review',
-    owner: 'Learning Team',
-  },
-  {
-    title: 'Binary Search Explained',
-    type: 'Video',
-    status: 'Published',
-    owner: 'Media Team',
-  },
-];
+const publishVariant = {
+  true: 'success',
+  false: 'muted',
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -96,16 +65,44 @@ const staggerContainer = {
   },
 };
 
-const statusVariant = {
-  Accepted: 'success',
-  'Wrong Answer': 'danger',
-  'Runtime Error': 'warning',
-  Draft: 'muted',
-  Review: 'warning',
-  Published: 'success',
-};
-
 function AdminDashboardPage() {
+  const [problems, setProblems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const loadProblems = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      setErrorMessage('');
+
+      const data = await getAdminProblems();
+
+      setProblems(data);
+    } catch (error) {
+      setErrorMessage(error.message || 'Unable to load problems right now.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      loadProblems();
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [loadProblems]);
+
+  const recentProblems = useMemo(() => {
+    return problems.slice(0, 8);
+  }, [problems]);
+
+  const publishedCount = useMemo(() => {
+    return problems.filter((problem) => problem.isPublished).length;
+  }, [problems]);
+
+  const draftCount = problems.length - publishedCount;
+
   return (
     <motion.div
       animate="visible"
@@ -124,12 +121,12 @@ function AdminDashboardPage() {
             <p className="text-sm font-semibold text-sky-300">Admin Overview</p>
 
             <h1 className="mt-2 text-3xl font-extrabold text-white">
-              Manage platform content and activity.
+              Manage AlgoArena content.
             </h1>
 
             <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400">
-              Track users, monitor submissions, review learning resources, and
-              keep AlgoArena&apos;s problem library ready for learners.
+              Keep problems, articles, and videos organized so learners can
+              move smoothly from practice to explanation.
             </p>
           </div>
 
@@ -146,125 +143,174 @@ function AdminDashboardPage() {
         className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
         variants={staggerContainer}
       >
-        {stats.map((stat) => (
+        {dashboardActions.map((item) => (
           <motion.div
-            key={stat.label}
+            key={item.label}
             transition={{ duration: 0.2 }}
             variants={fadeUp}
             whileHover={{ y: -5, scale: 1.02 }}
           >
-            <Card
-              className={`relative overflow-hidden border-white/10 bg-gradient-to-br ${stat.accent} to-[#172033] text-white`}
-            >
-              <p className="text-sm text-slate-400">{stat.label}</p>
+            <Link to={item.path}>
+              <Card
+                className={`relative h-full overflow-hidden border-white/10 bg-gradient-to-br ${item.accent} to-[#172033] text-white`}
+              >
+                <p className="text-sm text-slate-400">{item.label}</p>
 
-              <p className="mt-3 text-3xl font-extrabold text-white">
-                {stat.value}
-              </p>
+                <p className="mt-3 text-2xl font-extrabold text-white">
+                  {item.value}
+                </p>
 
-              <p className="mt-2 text-sm text-slate-500">{stat.helper}</p>
-            </Card>
+                <p className="mt-2 text-sm text-slate-500">{item.helper}</p>
+
+                <p className="mt-5 text-sm font-bold text-sky-300">
+                  {item.action}
+                </p>
+              </Card>
+            </Link>
           </motion.div>
         ))}
       </motion.section>
 
-      <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+      <section className="grid gap-6 lg:grid-cols-[1fr_280px]">
         <motion.section
           className="rounded-lg border border-white/10 bg-[#172033]"
           transition={{ duration: 0.35 }}
           variants={fadeUp}
         >
-          <div className="border-b border-white/10 px-5 py-4">
-            <h2 className="text-xl font-bold text-white">Recent Submissions</h2>
+          <div className="flex flex-col gap-3 border-b border-white/10 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-xl font-bold text-white">Problem Library</h2>
 
-            <p className="mt-1 text-sm text-slate-400">
-              Monitor latest coding activity across the platform.
+              <p className="mt-1 text-sm text-slate-400">
+                Latest admin view of published and draft problems.
+              </p>
+            </div>
+
+            <Link
+              className="text-sm font-bold text-sky-300 hover:text-sky-200"
+              to="/admin/problems"
+            >
+              Manage all
+            </Link>
+          </div>
+
+          {errorMessage && (
+            <div className="m-5 rounded-md border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+              {errorMessage}
+            </div>
+          )}
+
+          {isLoading ? (
+            <p className="px-5 py-8 text-center text-slate-400">
+              Loading problems...
             </p>
-          </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[760px] text-left">
+                <thead className="border-b border-white/10 text-sm text-slate-400">
+                  <tr>
+                    <th className="px-5 py-4 font-semibold">Problem</th>
+                    <th className="px-5 py-4 font-semibold">Difficulty</th>
+                    <th className="px-5 py-4 font-semibold">Topic</th>
+                    <th className="px-5 py-4 font-semibold">Status</th>
+                    <th className="px-5 py-4 font-semibold">Action</th>
+                  </tr>
+                </thead>
 
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[760px] text-left">
-              <thead className="border-b border-white/10 text-sm text-slate-400">
-                <tr>
-                  <th className="px-5 py-4 font-semibold">User</th>
-                  <th className="px-5 py-4 font-semibold">Problem</th>
-                  <th className="px-5 py-4 font-semibold">Language</th>
-                  <th className="px-5 py-4 font-semibold">Result</th>
-                  <th className="px-5 py-4 font-semibold">Time</th>
-                </tr>
-              </thead>
+                <tbody>
+                  {recentProblems.map((problem) => (
+                    <motion.tr
+                      className="border-b border-white/10 transition last:border-b-0 hover:bg-white/5"
+                      key={problem.id}
+                      transition={{ duration: 0.18 }}
+                      variants={fadeUp}
+                      whileHover={{ x: 4 }}
+                    >
+                      <td className="px-5 py-4">
+                        <p className="font-semibold text-white">
+                          {problem.title}
+                        </p>
+                        <p className="mt-1 text-xs text-slate-500">
+                          {problem.slug}
+                        </p>
+                      </td>
 
-              <tbody>
-                {recentSubmissions.map((submission) => (
-                  <motion.tr
-                    className="border-b border-white/10 transition last:border-b-0 hover:bg-white/5"
-                    key={`${submission.user}-${submission.problem}`}
-                    transition={{ duration: 0.18 }}
-                    variants={fadeUp}
-                    whileHover={{ x: 4 }}
-                  >
-                    <td className="px-5 py-4 font-semibold text-white">
-                      {submission.user}
-                    </td>
-                    <td className="px-5 py-4 text-slate-300">
-                      {submission.problem}
-                    </td>
-                    <td className="px-5 py-4 text-slate-400">
-                      {submission.language}
-                    </td>
-                    <td className="px-5 py-4">
-                      <Badge variant={statusVariant[submission.result]}>
-                        {submission.result}
-                      </Badge>
-                    </td>
-                    <td className="px-5 py-4 text-slate-400">
-                      {submission.time}
-                    </td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      <td className="px-5 py-4">
+                        <Badge
+                          variant={
+                            difficultyVariant[problem.difficultyLevelName]
+                          }
+                        >
+                          {problem.difficultyLevelName}
+                        </Badge>
+                      </td>
+
+                      <td className="px-5 py-4 text-slate-400">
+                        {problem.programmingDomainName}
+                      </td>
+
+                      <td className="px-5 py-4">
+                        <Badge variant={publishVariant[problem.isPublished]}>
+                          {problem.isPublished ? 'Published' : 'Draft'}
+                        </Badge>
+                      </td>
+
+                      <td className="px-5 py-4">
+                        <Link
+                          className="text-sm font-bold text-sky-300 hover:text-sky-200"
+                          to={`/admin/problems/${problem.id}/edit`}
+                        >
+                          Edit
+                        </Link>
+                      </td>
+                    </motion.tr>
+                  ))}
+
+                  {recentProblems.length === 0 && (
+                    <tr>
+                      <td
+                        className="px-5 py-8 text-center text-slate-400"
+                        colSpan="5"
+                      >
+                        No problems found.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
         </motion.section>
 
-        <motion.section
-          className="rounded-lg border border-white/10 bg-[#172033]"
+        <motion.aside
+          className="space-y-4"
           transition={{ duration: 0.35 }}
           variants={fadeUp}
         >
-          <div className="border-b border-white/10 px-5 py-4">
-            <h2 className="text-xl font-bold text-white">Content Queue</h2>
-
-            <p className="mt-1 text-sm text-slate-400">
-              Review drafts, learning resources, and published content.
+          <Card className="border-white/10 bg-[#172033] text-white">
+            <p className="text-sm text-slate-400">Total Problems</p>
+            <p className="mt-3 text-3xl font-extrabold">{problems.length}</p>
+            <p className="mt-2 text-sm text-slate-500">
+              Current admin problem records.
             </p>
-          </div>
+          </Card>
 
-          <div className="divide-y divide-white/10">
-            {contentQueue.map((item) => (
-              <motion.div
-                className="p-5 transition hover:bg-white/5"
-                key={item.title}
-                transition={{ duration: 0.18 }}
-                variants={fadeUp}
-                whileHover={{ x: 4 }}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="font-semibold text-white">{item.title}</p>
-                    <p className="mt-1 text-sm text-slate-400">
-                      {item.type} • {item.owner}
-                    </p>
-                  </div>
+          <Card className="border-white/10 bg-[#172033] text-white">
+            <p className="text-sm text-slate-400">Published</p>
+            <p className="mt-3 text-3xl font-extrabold">{publishedCount}</p>
+            <p className="mt-2 text-sm text-slate-500">
+              Visible to learners.
+            </p>
+          </Card>
 
-                  <Badge variant={statusVariant[item.status]}>
-                    {item.status}
-                  </Badge>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
+          <Card className="border-white/10 bg-[#172033] text-white">
+            <p className="text-sm text-slate-400">Drafts</p>
+            <p className="mt-3 text-3xl font-extrabold">{draftCount}</p>
+            <p className="mt-2 text-sm text-slate-500">
+              Hidden from learner pages.
+            </p>
+          </Card>
+        </motion.aside>
       </section>
     </motion.div>
   );
