@@ -5,38 +5,42 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { getPublishedProblems } from '../../problems/api/problemsApi';
 
-const stats = [
+const dashboardActions = [
   {
-    label: 'Problems Solved',
-    value: '36',
-    helper: 'Across all topics',
+    label: 'Practice Problems',
+    value: 'Start solving',
+    helper: 'Browse the full problem library and open any challenge.',
     icon: '✓',
+    path: '/user/problems',
     className:
       'border-emerald-500/20 bg-gradient-to-br from-emerald-500/25 to-[#1f1f1f]',
   },
   {
-    label: 'Current Streak',
-    value: '9',
-    helper: 'Days of practice',
-    icon: '🔥',
-    className:
-      'border-orange-500/25 bg-gradient-to-br from-orange-500/30 to-[#1f1f1f]',
-  },
-  {
-    label: 'Articles Read',
-    value: '14',
-    helper: 'Concepts reviewed',
+    label: 'Read Articles',
+    value: 'Revise concepts',
+    helper: 'Study explanations connected with each problem.',
     icon: 'A',
+    path: '/user/articles',
     className:
       'border-sky-500/20 bg-gradient-to-br from-sky-500/25 to-[#1f1f1f]',
   },
   {
-    label: 'Videos Watched',
-    value: '7',
-    helper: 'Guided lessons',
+    label: 'Watch Videos',
+    value: 'Learn visually',
+    helper: 'Watch guided walkthroughs without leaving AlgoArena.',
     icon: '▶',
+    path: '/user/videos',
     className:
       'border-violet-500/20 bg-gradient-to-br from-violet-500/25 to-[#1f1f1f]',
+  },
+  {
+    label: 'Profile',
+    value: 'Update details',
+    helper: 'Keep your learning profile and links ready.',
+    icon: 'U',
+    path: '/user/profile',
+    className:
+      'border-orange-500/25 bg-gradient-to-br from-orange-500/30 to-[#1f1f1f]',
   },
 ];
 
@@ -119,30 +123,36 @@ function UserDashboardPage() {
         className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
         variants={staggerContainer}
       >
-        {stats.map((stat) => (
+        {dashboardActions.map((action) => (
           <motion.div
-            key={stat.label}
+            key={action.label}
             transition={{ duration: 0.2 }}
             variants={fadeUp}
             whileHover={{ y: -5, scale: 1.02 }}
           >
-            <Card className={`relative overflow-hidden ${stat.className}`}>
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-text-muted text-sm">{stat.label}</p>
+            <Link to={action.path}>
+              <Card
+                className={`relative h-full overflow-hidden ${action.className}`}
+              >
+                <div className="flex h-full items-start justify-between gap-4">
+                  <div>
+                    <p className="text-text-muted text-sm">{action.label}</p>
 
-                  <p className="text-text mt-3 text-3xl font-extrabold">
-                    {stat.value}
-                  </p>
+                    <p className="text-text mt-3 text-2xl font-extrabold">
+                      {action.value}
+                    </p>
 
-                  <p className="text-text-muted mt-2 text-sm">{stat.helper}</p>
+                    <p className="text-text-muted mt-2 text-sm">
+                      {action.helper}
+                    </p>
+                  </div>
+
+                  <span className="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-md text-lg font-bold">
+                    {action.icon}
+                  </span>
                 </div>
-
-                <span className="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-md text-lg font-bold">
-                  {stat.icon}
-                </span>
-              </div>
-            </Card>
+              </Card>
+            </Link>
           </motion.div>
         ))}
       </motion.section>
