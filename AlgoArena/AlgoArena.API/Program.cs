@@ -28,7 +28,9 @@ namespace AlgoArena.API
                     policy
                         .WithOrigins(
                             "http://localhost:5173",
-                            "https://algo-arena-platform.netlify.app"
+                            "https://algo-arena-platform.netlify.app",
+                            "https://algoarena.cloud",
+                            "https://www.algoarena.cloud"
                         )
                         .AllowAnyHeader()
                         .AllowAnyMethod();
@@ -93,6 +95,9 @@ namespace AlgoArena.API
 
             // HTTPS
             // app.UseHttpsRedirection();
+
+            // Routing
+            app.UseRouting();
 
             // CORS
             app.UseCors("FrontendPolicy");
