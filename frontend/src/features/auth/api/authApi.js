@@ -1,10 +1,50 @@
-const API_BASE_URL = 'http://localhost:5036/api';
+// const API_BASE_URL = 'http://localhost:5036/api';
 
+// export async function loginUser(credentials) {
+//   const response = await fetch(`${API_BASE_URL}/auth/login`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(credentials),
+//   });
+
+//   const data = await response.json();
+
+//   if (!response.ok) {
+//     throw new Error(data.message || 'Invalid email or password.');
+//   }
+
+//   return data;
+// }
+
+// export async function registerUser(payload) {
+//   const response = await fetch(`${API_BASE_URL}/auth/register`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(payload),
+//   });
+
+//   const data = await response.json();
+
+//   if (!response.ok) {
+//     throw new Error(data.message || 'Registration failed.');
+//   }
+
+//   return data;
+// }
+const API_BASE_URL = "http://localhost:5036/api";
+
+// ===========================
+// User Login
+// ===========================
 export async function loginUser(credentials) {
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(credentials),
   });
@@ -12,17 +52,20 @@ export async function loginUser(credentials) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || 'Invalid email or password.');
+    throw new Error(data.message || "Invalid email or password.");
   }
 
   return data;
 }
 
+// ===========================
+// User Registration
+// ===========================
 export async function registerUser(payload) {
   const response = await fetch(`${API_BASE_URL}/auth/register`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
   });
@@ -30,7 +73,28 @@ export async function registerUser(payload) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || 'Registration failed.');
+    throw new Error(data.message || "Registration failed.");
+  }
+
+  return data;
+}
+
+// ===========================
+// Admin Login
+// ===========================
+export async function loginAdmin(credentials) {
+  const response = await fetch(`${API_BASE_URL}/admin/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Invalid admin email or password.");
   }
 
   return data;
