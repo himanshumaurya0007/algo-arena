@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import ScrollToTop from '../shared/components/ScrollToTop';
 
 const topLinks = [
@@ -9,6 +9,13 @@ const topLinks = [
 ];
 
 function DashboardLayout() {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  }
   return (
     <div className="bg-background text-text min-h-screen">
       <ScrollToTop />
@@ -43,16 +50,20 @@ function DashboardLayout() {
           </div>
 
           <div className="flex shrink-0 items-center gap-3">
-            <div className="bg-background text-text-muted hidden rounded-full px-4 py-2 text-sm xl:block">
-              Search
-            </div>
-
             <NavLink
               className="bg-primary rounded-md px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
               to="/user/profile"
             >
               Profile
             </NavLink>
+
+            <button
+              className="bg-secondary hover:bg-warning hover:text-text rounded-md px-4 py-2 text-sm font-semibold text-white transition"
+              onClick={handleLogout}
+              type="button"
+            >
+              Logout
+            </button>
           </div>
         </nav>
 
