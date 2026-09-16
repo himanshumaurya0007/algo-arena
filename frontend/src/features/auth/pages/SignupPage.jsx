@@ -305,7 +305,7 @@ function SignupPage() {
 
               <input
                 className="min-h-11 w-full rounded-lg border border-slate-700 bg-slate-800 px-4 text-white placeholder-slate-500 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30"
-                placeholder="you@example.com"
+                placeholder="you@gmail.com"
                 type="email"
                 name="email"
                 value={formData.email}

@@ -246,7 +246,7 @@ function UserLoginPage() {
 
           <input
             className="border-border bg-background focus:border-primary min-h-11 w-full rounded-md border px-4 outline-none"
-            placeholder="you@example.com"
+            placeholder="you@gmail.com"
             type="email"
             name="email"
             value={formData.email}
