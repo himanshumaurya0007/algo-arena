@@ -19,7 +19,7 @@
 //             <span className="text-sm font-semibold">Admin Email</span>
 //             <input
 //               className="border-border bg-background focus:border-primary min-h-11 w-full rounded-md border px-4 outline-none"
-//               placeholder="admin@example.com"
+//               placeholder="admin@gmail.com"
 //               type="email"
 //             />
 //           </label>
@@ -255,7 +255,7 @@ function AdminLoginPage() {
                 className="border-border bg-background focus:border-primary min-h-11 w-full rounded-md border px-4 outline-none"
                 type="email"
                 name="email"
-                placeholder="admin@example.com"
+                placeholder="admin@gmail.com"
                 value={formData.email}
                 onChange={handleChange}
               />
